@@ -1,0 +1,45 @@
+---
+title: "Sugestões de melhorias e comentários"
+subtitle: "MEDIDAS DE DIAGNÓSTICO EM MODELOS DE REGRESSÃO BETA PRIME"
+date: "23/08/2023 as 14h00"
+lang: pt
+author: "Prof. Dr. Pedro Rafael D. Marinho"
+format: html
+code-tools: true
+code-copy: true
+number-sections: true
+page-layout: full
+editor: source
+---
+
+# Objetivos principais e observações:
+
+Os objetivos principais do trabalho são:
+
+1. Estudo dos resíduos do modelo de regressão beta prime, para além do que Bourguignon et al. (2021) considerou.
+
+2. Bourguignon et al. (2021) considerou os resíduo quantílico e do de Pearson;
+
+3. Aqui foram considerados os resíduo
+  + **resíduos ponderado**. Esse foi o resíduo proposto;
+  + ponderado padronizado;
+  + Pearson padronizado.
+
+4. Avalia-se a distribuição empírica desses cinco (dois do trabalho do Marcelo e 3 novos)
+resíduos em diferentes cenários do modelo de regressão BP e comparamos seus desempenhos
+para detectar especificação incorreta.
+
+5. A distribuição beta prime pode ser escrita na família exponencial de distribuições. Portanto, "compete" com os modelos lineares generalizados.
+
+7. Densidade da Beta Prime
+
+
+$$f(y;\alpha, \beta) = \frac{y^{\alpha - 1}(1 + y)^{-(\alpha + \beta)}}{B(\alpha, \beta)}, y \geq 0,$$
+com $\alpha > 0$ e  $\beta > 0$.
+
+# Seguestões e comentários
+
+1. A ideia do estudo é a avaliação dos resíduos para o estudo da especificação do modelo de regressão beta prime. Portanto, queremos estimar $r({\bf x}) = \mathbb{E}(Y|X)$, ou seja, desejamos uma função de regressão com boa capacidade preditiva. Uma das suposiões é que $Y\sim BP$;
+
+2. O suporte da distribuição da beta prime não inclue o zero, i.e., $y > 0$. Sei que Bourguignon et al. (2021) definiu como $y > 0$, mas não seria $y \geq 0$? 
+
