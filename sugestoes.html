@@ -119,8 +119,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Aqui foram considerados os resíduo</p></li>
 </ol>
 <ul>
-<li><strong>resíduos ponderado</strong>. Esse foi o resíduo proposto;</li>
-<li>ponderado padronizado;</li>
+<li>resíduos ponderado;</li>
+<li><strong>ponderado padronizado</strong>. Esse foi o resíduo proposto;</li>
 <li>Pearson padronizado.</li>
 </ul>
 <ol start="4" type="1">
@@ -132,18 +132,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="seguestões-e-comentários" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Seguestões e comentários</h1>
-<ol type="1">
-<li><p>A ideia do estudo é a avaliação dos resíduos para o estudo da especificação do modelo de regressão beta prime. Portanto, queremos estimar <span class="math inline">\(r({\bf x}) = \mathbb{E}(Y|X)\)</span>, ou seja, desejamos uma função de regressão com boa capacidade preditiva. Uma das suposiões é que <span class="math inline">\(Y\sim BP\)</span>. Pergunta: nos cenários em que a distribuição de <span class="math inline">\(Y\)</span> é diferente da Beta Prime, utilizar teoria da informação e comparar funções de ligações dos MLGs, já que há um apelo comprativo emtre a distribuição Gama e Beta Prime, fornece interpretações distintas sobre a adequação do modelo? Por exemplo, utilizar critérios de informações como estatisticas de Cramér-von Mises and Anderson-Darling modificadas, que permite a comparação de modelos não encaixados, conseguiria tão bem como uma análise de resíduos identificar que a especificação do modelo de regressão beta prime para se estimar <span class="math inline">\(r({\bf x})\)</span> não seria adequada? Converse um pouco sobre isso nas correções!;</p></li>
-<li><p>O suporte da distribuição da beta prime não inclue o zero, i.e., <span class="math inline">\(y &gt; 0\)</span>? Sei que Bourguignon et al.&nbsp;(2021) definiu como <span class="math inline">\(y &gt; 0\)</span>, mas não seria <span class="math inline">\(y \geq 0\)</span>? Note que na página 34 do paper (página 2 do PDF), último parágrafo, ele diz:</p></li>
-</ol>
+<section id="suporte-da-distribuição-bp" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="suporte-da-distribuição-bp"><span class="header-section-number">2.1</span> Suporte da distribuição BP</h2>
+<p>O suporte da distribuição da beta prime não inclue o zero, i.e., <span class="math inline">\(y &gt; 0\)</span>? Sei que Bourguignon et al.&nbsp;(2021) definiu como <span class="math inline">\(y &gt; 0\)</span>, mas não seria <span class="math inline">\(y \geq 0\)</span>? Note que na página 34 do paper (página 2 do PDF), último parágrafo, ele diz:</p>
 <blockquote class="blockquote">
 <p>Pode-se provar que a função densidade BP está diminuindo com <span class="math inline">\(f(y|\alpha,\beta)\)</span>, se <span class="math inline">\(0 &lt; \alpha &lt; 1\)</span> e f <span class="math inline">\(f(y|\alpha, \beta)\)</span> é decrescente com moda em <span class="math inline">\(y = 0\)</span>. - Bourguignon et al.&nbsp;(2021)</p>
 </blockquote>
 <p>Além disso, nas referências da distribuição <span class="math inline">\(y\geq 0\)</span>.</p>
 <p><strong>Uma observação</strong>: Ela também é conhecida como distribuição de Pearson tipo VI. 🎁</p>
-<ol start="3" type="1">
-<li>No código das simulações há diversas interções de códigos R com o a função <code>source()</code>. Onde estão esses arquivos. Sugiro criar uma conta no <a href="https://github.com/">GitHub</a> e criar um repositório com o script R e um pequeno comentário do que cada código faz.</li>
-</ol>
+</section>
+<section id="utilizar-a-teoria-da-informação" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="utilizar-a-teoria-da-informação"><span class="header-section-number">2.2</span> Utilizar a teoria da informação</h2>
+<p>A ideia do estudo é a avaliação dos resíduos para a análise da especificação do modelo de regressão beta prime. Portanto, queremos estimar <span class="math inline">\(r({\bf x}) = \mathbb{E}(Y|X)\)</span>, ou seja, desejamos uma função de regressão com boa capacidade preditiva. Uma das suposiões é que <span class="math inline">\(Y\sim BP\)</span>. Pergunta: em cenários em que <span class="math inline">\(Y\)</span> segue a distribuição aproximadamente BP, utilizar estatísticas de adequação de ajuste para comparar a regressão BP com outros modelos de regressão, a exemplo, dos MGL’s, por exemplo com <span class="math inline">\(Y \sim Gama\)</span>, a análise de resíduos proposta não levam as mesmas conclusões de que chegaríamos em uma análise de resíduo? Por exemplo, utilizar estatísticas modificações de estatísticas como a Cramér-von Mises e Anderson-Darling para modelos não encaixados não poderia ser útil para comparar a distribuição de <span class="math inline">\(Y\)</span> e decidir qual modelo melhor se ajusta aos dados?</p>
+</section>
+<section id="especificação-correta-garante-boa-capacidade-preditiva" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="especificação-correta-garante-boa-capacidade-preditiva"><span class="header-section-number">2.3</span> Especificação correta garante boa capacidade preditiva?</h2>
+<p>A especificação adequada do modelo garante boa capacidade preditiva? Segundo a lógica de aprendizagem de máquina não! Podemos ter modelos que não estão bem especificados, mas possuem boa performance preditiva. Por exemplo, tente ajustar um <a href="https://hastie.su.domains/ISLR2/ISLRv2_corrected_June_2023.pdf">random forest</a> em um problema, mesmo <span class="math inline">\(Y \in B(\alpha,\beta)\)</span>, em um grande conjunto de dados, e usando um conjunto de teste, calcule o erro quadrático médio observado na amostra independente. Muito provavelmente o <em>random forest</em> terá uma capacidade preditivo igual ou superior ao modelo de regressão beta prime.</p>
+</section>
+<section id="pensam-em-adicionar-penalização" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="pensam-em-adicionar-penalização"><span class="header-section-number">2.4</span> Pensam em adicionar penalização?</h2>
+<p>Vocês pensaram em adicionar algum tipo de penalização no modelo de regressão beta prime? Existe um <em>trade off</em> entre viés e variância. Dessa forma, até que ponto as estatísticas de análise de resíduos refletem isso? Podemos ter um modelo não-viesado, porém com uma alta variância, i.e., <em>overfitting</em>. Esses modelos não tem boa performance preditiva! As vezes preferimos modelos um pouco mais viesados mas com variância baixa!</p>
+</section>
+<section id="a-variância-do-modelo-de-regressão-bp-é-maior" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="a-variância-do-modelo-de-regressão-bp-é-maior"><span class="header-section-number">2.5</span> a variância do modelo de regressão BP é maior</h2>
+<blockquote class="blockquote">
+<p>“Uma das vantagens refere-se à modelagem de dados mais dispersos, uma vez que a variância do modelo de regressão BP é maior que a variância do modelo gama.” - Maria Eduarda, página 12</p>
+</blockquote>
+<p>Você refere-se à variância do modelo ou a capacidade do modelo em modelar <span class="math inline">\(Y\)</span> com maior variância? O risco preditivo do modelo não sofre com modelos com maior variância? Veja que o risco preditivo <span class="math inline">\(R(\widehat{g})\)</span>, usando a norma <span class="math inline">\(L_2\)</span> no risco preditivo de um modelo de regressão, temos que o risco poderá ser decomposto como:</p>
+<p><span class="math display">\[R(\widehat{g}) = \mathbb{E}\left[(Y - \widehat{g}({\bf X}))^2| {\bf X} = {\bf x}\right] = \underbrace{\mathbb{V}[Y | {\bf X = x}]}_{\mathrm{i - Variância\,\, intrínseca}} + \overbrace{(r({\bf x}) - \mathbb{E}[\widehat{g}({\bf x})])^2}^{\mathrm{ii - Viés\, ao\, quadrado\, do\, modelo}} + \underbrace{\mathbb{V}[\widehat{g}({\bf x})]}_{\mathrm{iii - Variância\, do\, modelo}},\]</span></p>
+<p>em que <span class="math inline">\(\widehat{g}(\cdot)\)</span> é sua função de regressão estimada. Quando você diz que a variância do modelo de regressão BP é maior, você não está dizendo que iii é maior? Isso não me daria um maior risco preditivo? Escreva melhor o que você está querendo dizer com variância maior!</p>
+</section>
+<section id="o-que-é-precisão-dos-dados" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="o-que-é-precisão-dos-dados"><span class="header-section-number">2.6</span> O que é precisão dos dados?</h2>
+<blockquote class="blockquote">
+<p>Por outro lado, o resíduo ponderado padronizado aqui proposto deverá ser utilizado com cautela, dado que os experimentos de Monte Carlo revelaram que a proximidade da sua distribuição empírica pela distribuição normal padrão depende da precisão dos dados ajustados pelo modelo de regressão BP. - Maria Eduarda, página 41, primeira linha.</p>
+</blockquote>
+<p><strong>Precisão dos dados? Essa expressão é estranha!</strong></p>
+<p>O que tem que ser preciso são os modelos. Acho que você se refere à convergência assintótica das estimativas dos erros, nesse caso, do estimador do resíduo ponderado padronizado, denotado no trabalho por <span class="math inline">\(r_i^{\beta^*}\)</span> para a distribuição normal. Daí, quando <span class="math inline">\(n \rightarrow +\infty\)</span> temos que pela Teorema Central do Limite, <span class="math inline">\(r_i^{\beta^*}\)</span> deve convergir em distribuição para a distribuição normal. <strong>Precisão de dados</strong> tem outra conotação!</p>
+</section>
+<section id="cadê-os-demais-códigos" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="cadê-os-demais-códigos"><span class="header-section-number">2.7</span> Cadê os demais códigos?</h2>
+<p>No código das simulações há diversas interções de códigos R com o a função <code>source()</code>. Onde estão esses arquivos. Sugiro criar uma conta no <a href="https://github.com/">GitHub</a> e criar um repositório com o script R e um pequeno comentário do que cada código faz.</p>
 <ul>
 <li>Onde está <code>gamlss_BP.R</code>?</li>
 <li>Onde está <code>glmBP.R</code>?</li>
@@ -153,6 +182,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>É preciso que seu experimento seja totalmente repoduzível. Quem ler quer chegar aos mesmos resultados!</p>
 <!-- -->
 
+</section>
 </section>
 
 </main>
@@ -527,8 +557,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Bourguignon et al. (2021) considerou os resíduo quantílico e do de Pearson;</span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Aqui foram considerados os resíduo</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>**resíduos ponderado**. Esse foi o resíduo proposto;</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>ponderado padronizado;</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>resíduos ponderado;</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>**ponderado padronizado**. Esse foi o resíduo proposto;</span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>Pearson padronizado.</span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Avalia-se a distribuição empírica desses cinco (dois do trabalho do Marcelo e 3 novos)</span>
@@ -545,9 +575,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="fu"># Seguestões e comentários</span></span>
 <span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>A ideia do estudo é a avaliação dos resíduos para o estudo da especificação do modelo de regressão beta prime. Portanto, queremos estimar $r({\bf x}) = \mathbb{E}(Y|X)$, ou seja, desejamos uma função de regressão com boa capacidade preditiva. Uma das suposiões é que $Y\sim BP$. Pergunta: nos cenários em que a distribuição de $Y$ é diferente da Beta Prime, utilizar teoria da informação e comparar funções de ligações dos MLGs, já que há um apelo comprativo emtre a distribuição Gama e Beta Prime, fornece interpretações distintas sobre a adequação do modelo? Por exemplo, utilizar critérios de informações como estatisticas de Cramér-von Mises and Anderson-Darling modificadas, que permite a comparação de modelos não encaixados, conseguiria tão bem como uma análise de resíduos identificar que a especificação do modelo de regressão beta prime para se estimar $r({\bf x})$ não seria adequada? Converse um pouco sobre isso nas correções!;</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="fu">## Suporte da distribuição BP</span></span>
 <span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>O suporte da distribuição da beta prime não inclue o zero, i.e., $y &gt; 0$? Sei que Bourguignon et al. (2021) definiu como $y &gt; 0$, mas não seria $y \geq 0$? Note que na página 34 do paper (página 2 do PDF), último parágrafo, ele diz:</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>O suporte da distribuição da beta prime não inclue o zero, i.e., $y &gt; 0$? Sei que Bourguignon et al. (2021) definiu como $y &gt; 0$, mas não seria $y \geq 0$? Note que na página 34 do paper (página 2 do PDF), último parágrafo, ele diz:</span>
 <span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Pode-se provar que a função densidade BP está diminuindo com $f(y|\alpha,\beta)$, se $0 &lt; \alpha &lt; 1$ e f $f(y|\alpha, \beta)$ é decrescente com moda em $y = 0$. - Bourguignon et al. (2021)</span></span>
 <span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
@@ -555,14 +585,52 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>**Uma observação**: Ela também é conhecida como distribuição de Pearson tipo VI. 🎁</span>
 <span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>No código das simulações há diversas interções de códigos R com o a função <span class="in">`source()`</span>. Onde estão esses arquivos. Sugiro criar uma conta no <span class="co">[</span><span class="ot">GitHub</span><span class="co">](https://github.com/)</span> e criar um repositório com o script R e um pequeno comentário do que cada código faz.</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="fu">## Utilizar a teoria da informação</span></span>
 <span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>Onde está <span class="in">`gamlss_BP.R`</span>?</span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>Onde está <span class="in">`glmBP.R`</span>?</span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>Onde está <span class="in">`Estimation.R`</span>?</span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>Onde está <span class="in">`Residual_H_Log_Like_BP.R`</span>?</span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>É preciso que seu experimento seja totalmente repoduzível. Quem ler quer chegar aos mesmos resultados!</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>A ideia do estudo é a avaliação dos resíduos para a análise da especificação do modelo de regressão beta prime. Portanto, queremos estimar $r({\bf x}) = \mathbb{E}(Y|X)$, ou seja, desejamos uma função de regressão com boa capacidade preditiva. Uma das suposiões é que $Y\sim BP$. Pergunta: em cenários em que $Y$ segue a distribuição aproximadamente BP, utilizar estatísticas de adequação de ajuste para comparar a regressão BP com outros modelos de regressão, a exemplo, dos MGL's, por exemplo com $Y \sim Gama$, a análise de resíduos proposta não levam as mesmas conclusões de que chegaríamos em uma análise de resíduo? Por exemplo, utilizar estatísticas modificações de estatísticas como a Cramér-von Mises e Anderson-Darling para modelos não encaixados não poderia ser útil para comparar a distribuição de $Y$ e decidir qual modelo melhor se ajusta aos dados?</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="fu">## Especificação correta garante boa capacidade preditiva?</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>A especificação adequada do modelo garante boa capacidade preditiva? Segundo a lógica de aprendizagem de máquina não! Podemos ter modelos que não estão bem especificados, mas possuem boa performance preditiva. Por exemplo, tente ajustar um <span class="co">[</span><span class="ot">random forest</span><span class="co">](https://hastie.su.domains/ISLR2/ISLRv2_corrected_June_2023.pdf)</span> em um problema, mesmo $Y \in B(\alpha,\beta)$, em um grande conjunto de dados, e usando um conjunto de teste, calcule o erro quadrático médio observado na amostra independente. Muito provavelmente o *random forest* terá uma capacidade preditivo igual ou superior ao modelo de regressão beta prime.</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="fu">## Pensam em adicionar penalização?</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>Vocês pensaram em adicionar algum tipo de penalização no modelo de regressão beta prime? Existe um *trade off* entre viés e variância. Dessa forma, até que ponto as estatísticas de análise de resíduos refletem isso? Podemos ter um modelo não-viesado, porém com uma alta variância, i.e., *overfitting*. Esses modelos não tem boa performance preditiva! As vezes preferimos modelos um pouco mais viesados mas com variância baixa! </span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="fu">## a variância do modelo de regressão BP é maior</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; "Uma das vantagens refere-se à modelagem de dados mais dispersos, uma vez que a variância do</span></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a><span class="at">modelo de regressão BP é maior que a variância do modelo gama." - Maria Eduarda, página 12</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>Você refere-se à variância do modelo ou a capacidade do modelo em modelar $Y$ com maior variância? O risco preditivo do modelo não sofre com modelos com maior variância? Veja que o risco preditivo $R(\widehat{g})$, usando a norma $L_2$ no risco preditivo de um modelo de regressão, temos que o risco poderá ser decomposto como:</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>$$R(\widehat{g}) = \mathbb{E}\left<span class="co">[</span><span class="ot">(Y - \widehat{g}({\bf X}))^2| {\bf X} = {\bf x}\right</span><span class="co">]</span> = \underbrace{\mathbb{V}<span class="co">[</span><span class="ot">Y | {\bf X = x}</span><span class="co">]</span>}_{\mathrm{i - Variância\,\, intrínseca}} + \overbrace{(r({\bf x}) - \mathbb{E}[\widehat{g}({\bf x})])^2}^{\mathrm{ii - Viés\, ao\, quadrado\, do\, modelo}} + \underbrace{\mathbb{V}[\widehat{g}({\bf x})]}_{\mathrm{iii - Variância\, do\, modelo}},$$ </span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>em que $\widehat{g}(\cdot)$ é sua função de regressão estimada. Quando você diz que a variância do modelo de regressão BP é maior, você não está dizendo que iii é maior? Isso não me daria um maior risco preditivo? Escreva melhor o que você está querendo dizer com variância maior!</span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a><span class="fu">## O que é precisão dos dados?</span></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Por outro lado, o resíduo ponderado padronizado aqui proposto deverá ser</span></span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a><span class="at">utilizado com cautela, dado que os experimentos de Monte Carlo revelaram que a proximidade</span></span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a><span class="at">da sua distribuição empírica pela distribuição normal padrão depende da precisão dos dados</span></span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a><span class="at">ajustados pelo modelo de regressão BP. - Maria Eduarda, página 41, primeira linha.</span></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>**Precisão dos dados? Essa expressão é estranha!**</span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>O que tem que ser preciso são os modelos. Acho que você se refere à convergência assintótica das estimativas dos erros, nesse caso, do estimador do resíduo ponderado padronizado, denotado no trabalho por $r_i^{\beta^*}$ para a distribuição normal. Daí, quando $n \rightarrow +\infty$ temos que pela Teorema Central do Limite, $r_i^{\beta^*}$ deve convergir em distribuição para a distribuição normal. **Precisão de dados** tem outra conotação!</span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a><span class="fu">## Cadê os demais códigos?</span></span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a>No código das simulações há diversas interções de códigos R com o a função <span class="in">`source()`</span>. Onde estão esses arquivos. Sugiro criar uma conta no <span class="co">[</span><span class="ot">GitHub</span><span class="co">](https://github.com/)</span> e criar um repositório com o script R e um pequeno comentário do que cada código faz.</span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>Onde está <span class="in">`gamlss_BP.R`</span>?</span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>Onde está <span class="in">`glmBP.R`</span>?</span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>Onde está <span class="in">`Estimation.R`</span>?</span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>Onde está <span class="in">`Residual_H_Log_Like_BP.R`</span>?</span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a>É preciso que seu experimento seja totalmente repoduzível. Quem ler quer chegar aos mesmos resultados!</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

@@ -21,8 +21,8 @@ Os objetivos principais do trabalho são:
 2. Bourguignon et al. (2021) considerou os resíduo quantílico e do de Pearson;
 
 3. Aqui foram considerados os resíduo
-  + **resíduos ponderado**. Esse foi o resíduo proposto;
-  + ponderado padronizado;
+  + resíduos ponderado;
+  + **ponderado padronizado**. Esse foi o resíduo proposto;
   + Pearson padronizado.
 
 4. Avalia-se a distribuição empírica desses cinco (dois do trabalho do Marcelo e 3 novos)
@@ -39,9 +39,9 @@ com $\alpha > 0$ e  $\beta > 0$.
 
 # Seguestões e comentários
 
-1. A ideia do estudo é a avaliação dos resíduos para o estudo da especificação do modelo de regressão beta prime. Portanto, queremos estimar $r({\bf x}) = \mathbb{E}(Y|X)$, ou seja, desejamos uma função de regressão com boa capacidade preditiva. Uma das suposiões é que $Y\sim BP$. Pergunta: nos cenários em que a distribuição de $Y$ é diferente da Beta Prime, utilizar teoria da informação e comparar funções de ligações dos MLGs, já que há um apelo comprativo emtre a distribuição Gama e Beta Prime, fornece interpretações distintas sobre a adequação do modelo? Por exemplo, utilizar critérios de informações como estatisticas de Cramér-von Mises and Anderson-Darling modificadas, que permite a comparação de modelos não encaixados, conseguiria tão bem como uma análise de resíduos identificar que a especificação do modelo de regressão beta prime para se estimar $r({\bf x})$ não seria adequada? Converse um pouco sobre isso nas correções!;
+## Suporte da distribuição BP
 
-2. O suporte da distribuição da beta prime não inclue o zero, i.e., $y > 0$? Sei que Bourguignon et al. (2021) definiu como $y > 0$, mas não seria $y \geq 0$? Note que na página 34 do paper (página 2 do PDF), último parágrafo, ele diz:
+O suporte da distribuição da beta prime não inclue o zero, i.e., $y > 0$? Sei que Bourguignon et al. (2021) definiu como $y > 0$, mas não seria $y \geq 0$? Note que na página 34 do paper (página 2 do PDF), último parágrafo, ele diz:
 
 > Pode-se provar que a função densidade BP está diminuindo com $f(y|\alpha,\beta)$, se $0 < \alpha < 1$ e f $f(y|\alpha, \beta)$ é decrescente com moda em $y = 0$. - Bourguignon et al. (2021)
 
@@ -49,7 +49,45 @@ Além disso, nas referências da distribuição $y\geq 0$.
 
 **Uma observação**: Ela também é conhecida como distribuição de Pearson tipo VI. 🎁
 
-3. No código das simulações há diversas interções de códigos R com o a função `source()`. Onde estão esses arquivos. Sugiro criar uma conta no [GitHub](https://github.com/) e criar um repositório com o script R e um pequeno comentário do que cada código faz.
+## Utilizar a teoria da informação
+
+A ideia do estudo é a avaliação dos resíduos para a análise da especificação do modelo de regressão beta prime. Portanto, queremos estimar $r({\bf x}) = \mathbb{E}(Y|X)$, ou seja, desejamos uma função de regressão com boa capacidade preditiva. Uma das suposiões é que $Y\sim BP$. Pergunta: em cenários em que $Y$ segue a distribuição aproximadamente BP, utilizar estatísticas de adequação de ajuste para comparar a regressão BP com outros modelos de regressão, a exemplo, dos MGL's, por exemplo com $Y \sim Gama$, a análise de resíduos proposta não levam as mesmas conclusões de que chegaríamos em uma análise de resíduo? Por exemplo, utilizar estatísticas modificações de estatísticas como a Cramér-von Mises e Anderson-Darling para modelos não encaixados não poderia ser útil para comparar a distribuição de $Y$ e decidir qual modelo melhor se ajusta aos dados?
+
+## Especificação correta garante boa capacidade preditiva?
+
+A especificação adequada do modelo garante boa capacidade preditiva? Segundo a lógica de aprendizagem de máquina não! Podemos ter modelos que não estão bem especificados, mas possuem boa performance preditiva. Por exemplo, tente ajustar um [random forest](https://hastie.su.domains/ISLR2/ISLRv2_corrected_June_2023.pdf) em um problema, mesmo $Y \in B(\alpha,\beta)$, em um grande conjunto de dados, e usando um conjunto de teste, calcule o erro quadrático médio observado na amostra independente. Muito provavelmente o *random forest* terá uma capacidade preditivo igual ou superior ao modelo de regressão beta prime.
+
+## Pensam em adicionar penalização?
+
+Vocês pensaram em adicionar algum tipo de penalização no modelo de regressão beta prime? Existe um *trade off* entre viés e variância. Dessa forma, até que ponto as estatísticas de análise de resíduos refletem isso? Podemos ter um modelo não-viesado, porém com uma alta variância, i.e., *overfitting*. Esses modelos não tem boa performance preditiva! As vezes preferimos modelos um pouco mais viesados mas com variância baixa! 
+
+## a variância do modelo de regressão BP é maior
+
+> "Uma das vantagens refere-se à modelagem de dados mais dispersos, uma vez que a variância do
+modelo de regressão BP é maior que a variância do modelo gama." - Maria Eduarda, página 12
+
+Você refere-se à variância do modelo ou a capacidade do modelo em modelar $Y$ com maior variância? O risco preditivo do modelo não sofre com modelos com maior variância? Veja que o risco preditivo $R(\widehat{g})$, usando a norma $L_2$ no risco preditivo de um modelo de regressão, temos que o risco poderá ser decomposto como:
+
+$$R(\widehat{g}) = \mathbb{E}\left[(Y - \widehat{g}({\bf X}))^2| {\bf X} = {\bf x}\right] = \underbrace{\mathbb{V}[Y | {\bf X = x}]}_{\mathrm{i - Variância\,\, intrínseca}} + \overbrace{(r({\bf x}) - \mathbb{E}[\widehat{g}({\bf x})])^2}^{\mathrm{ii - Viés\, ao\, quadrado\, do\, modelo}} + \underbrace{\mathbb{V}[\widehat{g}({\bf x})]}_{\mathrm{iii - Variância\, do\, modelo}},$$ 
+
+em que $\widehat{g}(\cdot)$ é sua função de regressão estimada. Quando você diz que a variância do modelo de regressão BP é maior, você não está dizendo que iii é maior? Isso não me daria um maior risco preditivo? Escreva melhor o que você está querendo dizer com variância maior!
+
+
+## O que é precisão dos dados?
+
+> Por outro lado, o resíduo ponderado padronizado aqui proposto deverá ser
+utilizado com cautela, dado que os experimentos de Monte Carlo revelaram que a proximidade
+da sua distribuição empírica pela distribuição normal padrão depende da precisão dos dados
+ajustados pelo modelo de regressão BP. - Maria Eduarda, página 41, primeira linha.
+
+**Precisão dos dados? Essa expressão é estranha!**
+
+O que tem que ser preciso são os modelos. Acho que você se refere à convergência assintótica das estimativas dos erros, nesse caso, do estimador do resíduo ponderado padronizado, denotado no trabalho por $r_i^{\beta^*}$ para a distribuição normal. Daí, quando $n \rightarrow +\infty$ temos que pela Teorema Central do Limite, $r_i^{\beta^*}$ deve convergir em distribuição para a distribuição normal. **Precisão de dados** tem outra conotação!
+
+
+## Cadê os demais códigos?
+
+No código das simulações há diversas interções de códigos R com o a função `source()`. Onde estão esses arquivos. Sugiro criar uma conta no [GitHub](https://github.com/) e criar um repositório com o script R e um pequeno comentário do que cada código faz.
 
   + Onde está `gamlss_BP.R`?
   + Onde está `glmBP.R`?
