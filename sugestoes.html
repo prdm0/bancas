@@ -133,9 +133,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="seguestões-e-comentários" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Seguestões e comentários</h1>
 <ol type="1">
-<li><p>A ideia do estudo é a avaliação dos resíduos para o estudo da especificação do modelo de regressão beta prime. Portanto, queremos estimar <span class="math inline">\(r({\bf x}) = \mathbb{E}(Y|X)\)</span>, ou seja, desejamos uma função de regressão com boa capacidade preditiva. Uma das suposiões é que <span class="math inline">\(Y\sim BP\)</span>;</p></li>
-<li><p>O suporte da distribuição da beta prime não inclue o zero, i.e., <span class="math inline">\(y &gt; 0\)</span>. Sei que Bourguignon et al.&nbsp;(2021) definiu como <span class="math inline">\(y &gt; 0\)</span>, mas não seria <span class="math inline">\(y \geq 0\)</span>?</p></li>
+<li><p>A ideia do estudo é a avaliação dos resíduos para o estudo da especificação do modelo de regressão beta prime. Portanto, queremos estimar <span class="math inline">\(r({\bf x}) = \mathbb{E}(Y|X)\)</span>, ou seja, desejamos uma função de regressão com boa capacidade preditiva. Uma das suposiões é que <span class="math inline">\(Y\sim BP\)</span>. Pergunta: nos cenários em que a distribuição de <span class="math inline">\(Y\)</span> é diferente da Beta Prime, utilizar teoria da informação e comparar funções de ligações dos MLGs, já que há um apelo comprativo emtre a distribuição Gama e Beta Prime, fornece interpretações distintas sobre a adequação do modelo? Por exemplo, utilizar critérios de informações como estatisticas de Cramér-von Mises and Anderson-Darling modificadas, que permite a comparação de modelos não encaixados, conseguiria tão bem como uma análise de resíduos identificar que a especificação do modelo de regressão beta prime para se estimar <span class="math inline">\(r({\bf x})\)</span> não seria adequada? Converse um pouco sobre isso nas correções!;</p></li>
+<li><p>O suporte da distribuição da beta prime não inclue o zero, i.e., <span class="math inline">\(y &gt; 0\)</span>? Sei que Bourguignon et al.&nbsp;(2021) definiu como <span class="math inline">\(y &gt; 0\)</span>, mas não seria <span class="math inline">\(y \geq 0\)</span>? Note que na página 34 do paper (página 2 do PDF), último parágrafo, ele diz:</p></li>
 </ol>
+<blockquote class="blockquote">
+<p>Pode-se provar que a função densidade BP está diminuindo com <span class="math inline">\(f(y|\alpha,\beta)\)</span>, se <span class="math inline">\(0 &lt; \alpha &lt; 1\)</span> e f <span class="math inline">\(f(y|\alpha, \beta)\)</span> é decrescente com moda em <span class="math inline">\(y = 0\)</span>. - Bourguignon et al.&nbsp;(2021)</p>
+</blockquote>
+<p>Além disso, nas referências da distribuição <span class="math inline">\(y\geq 0\)</span>.</p>
+<p><strong>Uma observação</strong>: Ela também é conhecida como distribuição de Pearson tipo VI. 🎁</p>
+<ol start="3" type="1">
+<li>No código das simulações há diversas interções de códigos R com o a função <code>source()</code>. Onde estão esses arquivos. Sugiro criar uma conta no <a href="https://github.com/">GitHub</a> e criar um repositório com o script R e um pequeno comentário do que cada código faz.</li>
+</ol>
+<ul>
+<li>Onde está <code>gamlss_BP.R</code>?</li>
+<li>Onde está <code>glmBP.R</code>?</li>
+<li>Onde está <code>Estimation.R</code>?</li>
+<li>Onde está <code>Residual_H_Log_Like_BP.R</code>?</li>
+</ul>
+<p>É preciso que seu experimento seja totalmente repoduzível. Quem ler quer chegar aos mesmos resultados!</p>
 <!-- -->
 
 </section>
@@ -530,9 +545,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="fu"># Seguestões e comentários</span></span>
 <span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>A ideia do estudo é a avaliação dos resíduos para o estudo da especificação do modelo de regressão beta prime. Portanto, queremos estimar $r({\bf x}) = \mathbb{E}(Y|X)$, ou seja, desejamos uma função de regressão com boa capacidade preditiva. Uma das suposiões é que $Y\sim BP$;</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>A ideia do estudo é a avaliação dos resíduos para o estudo da especificação do modelo de regressão beta prime. Portanto, queremos estimar $r({\bf x}) = \mathbb{E}(Y|X)$, ou seja, desejamos uma função de regressão com boa capacidade preditiva. Uma das suposiões é que $Y\sim BP$. Pergunta: nos cenários em que a distribuição de $Y$ é diferente da Beta Prime, utilizar teoria da informação e comparar funções de ligações dos MLGs, já que há um apelo comprativo emtre a distribuição Gama e Beta Prime, fornece interpretações distintas sobre a adequação do modelo? Por exemplo, utilizar critérios de informações como estatisticas de Cramér-von Mises and Anderson-Darling modificadas, que permite a comparação de modelos não encaixados, conseguiria tão bem como uma análise de resíduos identificar que a especificação do modelo de regressão beta prime para se estimar $r({\bf x})$ não seria adequada? Converse um pouco sobre isso nas correções!;</span>
 <span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>O suporte da distribuição da beta prime não inclue o zero, i.e., $y &gt; 0$. Sei que Bourguignon et al. (2021) definiu como $y &gt; 0$, mas não seria $y \geq 0$? </span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>O suporte da distribuição da beta prime não inclue o zero, i.e., $y &gt; 0$? Sei que Bourguignon et al. (2021) definiu como $y &gt; 0$, mas não seria $y \geq 0$? Note que na página 34 do paper (página 2 do PDF), último parágrafo, ele diz:</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Pode-se provar que a função densidade BP está diminuindo com $f(y|\alpha,\beta)$, se $0 &lt; \alpha &lt; 1$ e f $f(y|\alpha, \beta)$ é decrescente com moda em $y = 0$. - Bourguignon et al. (2021)</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>Além disso, nas referências da distribuição $y\geq 0$.</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>**Uma observação**: Ela também é conhecida como distribuição de Pearson tipo VI. 🎁</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>No código das simulações há diversas interções de códigos R com o a função <span class="in">`source()`</span>. Onde estão esses arquivos. Sugiro criar uma conta no <span class="co">[</span><span class="ot">GitHub</span><span class="co">](https://github.com/)</span> e criar um repositório com o script R e um pequeno comentário do que cada código faz.</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>Onde está <span class="in">`gamlss_BP.R`</span>?</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>Onde está <span class="in">`glmBP.R`</span>?</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>Onde está <span class="in">`Estimation.R`</span>?</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>Onde está <span class="in">`Residual_H_Log_Like_BP.R`</span>?</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>É preciso que seu experimento seja totalmente repoduzível. Quem ler quer chegar aos mesmos resultados!</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

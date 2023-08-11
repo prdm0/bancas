@@ -39,7 +39,21 @@ com $\alpha > 0$ e  $\beta > 0$.
 
 # Seguestões e comentários
 
-1. A ideia do estudo é a avaliação dos resíduos para o estudo da especificação do modelo de regressão beta prime. Portanto, queremos estimar $r({\bf x}) = \mathbb{E}(Y|X)$, ou seja, desejamos uma função de regressão com boa capacidade preditiva. Uma das suposiões é que $Y\sim BP$;
+1. A ideia do estudo é a avaliação dos resíduos para o estudo da especificação do modelo de regressão beta prime. Portanto, queremos estimar $r({\bf x}) = \mathbb{E}(Y|X)$, ou seja, desejamos uma função de regressão com boa capacidade preditiva. Uma das suposiões é que $Y\sim BP$. Pergunta: nos cenários em que a distribuição de $Y$ é diferente da Beta Prime, utilizar teoria da informação e comparar funções de ligações dos MLGs, já que há um apelo comprativo emtre a distribuição Gama e Beta Prime, fornece interpretações distintas sobre a adequação do modelo? Por exemplo, utilizar critérios de informações como estatisticas de Cramér-von Mises and Anderson-Darling modificadas, que permite a comparação de modelos não encaixados, conseguiria tão bem como uma análise de resíduos identificar que a especificação do modelo de regressão beta prime para se estimar $r({\bf x})$ não seria adequada? Converse um pouco sobre isso nas correções!;
 
-2. O suporte da distribuição da beta prime não inclue o zero, i.e., $y > 0$. Sei que Bourguignon et al. (2021) definiu como $y > 0$, mas não seria $y \geq 0$? 
+2. O suporte da distribuição da beta prime não inclue o zero, i.e., $y > 0$? Sei que Bourguignon et al. (2021) definiu como $y > 0$, mas não seria $y \geq 0$? Note que na página 34 do paper (página 2 do PDF), último parágrafo, ele diz:
 
+> Pode-se provar que a função densidade BP está diminuindo com $f(y|\alpha,\beta)$, se $0 < \alpha < 1$ e f $f(y|\alpha, \beta)$ é decrescente com moda em $y = 0$. - Bourguignon et al. (2021)
+
+Além disso, nas referências da distribuição $y\geq 0$.
+
+**Uma observação**: Ela também é conhecida como distribuição de Pearson tipo VI. 🎁
+
+3. No código das simulações há diversas interções de códigos R com o a função `source()`. Onde estão esses arquivos. Sugiro criar uma conta no [GitHub](https://github.com/) e criar um repositório com o script R e um pequeno comentário do que cada código faz.
+
+  + Onde está `gamlss_BP.R`?
+  + Onde está `glmBP.R`?
+  + Onde está `Estimation.R`?
+  + Onde está `Residual_H_Log_Like_BP.R`?
+  
+É preciso que seu experimento seja totalmente repoduzível. Quem ler quer chegar aos mesmos resultados!
