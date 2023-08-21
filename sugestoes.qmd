@@ -63,7 +63,7 @@ O que é definir os resíudos? Não seria melhor trocar definir por "avaliamos"?
 
 O suporte da distribuição da beta prime não inclue o zero ($y \geq 0$)? Sei que Bourguignon et al. (2021) definiu como $y > 0$, mas não seria $y \geq 0$? Note que na página 34 do paper (página 2 do PDF), último parágrafo, ele diz:
 
-> Pode-se provar que a função densidade BP está diminuindo com $f(y|\alpha,\beta)$, se $0 < \alpha < 1$ e f $f(y|\alpha, \beta)$ é decrescente com moda em $y = 0$. - Bourguignon et al. (2021)
+> Pode-se provar que a função densidade BP está diminuindo com $f(y|\alpha,\beta)$, se $0 < \alpha < 1$ com moda em $y = 0$. - Bourguignon et al. (2021)
 
 Além disso, nas referências da distribuição $y\geq 0$.
 
@@ -105,7 +105,7 @@ Nesse artigo ele estabelece duas culturas na modelagem estatística:
 
 2. **Algorithmic modeling culture**: essa é a cultura que domina a comunidade de aprendizagem de máquina. Nessa abordagem, o principal objetivo são as predições por meio de novas observações. Não se assume que o modelo utilizado é o modelo correto. Nesse tipo de modelagem, muitas vezes os algoritmos não envolve nenhuma estrutura probabilística. Muitas vezes, modelos não bem especificado conduzem a boas predições.
 
-Existe uma sequência de respostas à esse paper, por exemplo, estatísticos renomados como o David Cox e o Bradley Efron respondem positivamente à esse paper.
+Existe uma sequência de respostas à esse paper, por exemplo, estatísticos renomados como o David Cox e o Bradley Efron respondem positivamente à esse paper. O artigo possui mais de 5300 citações.
 
 
 Podemos ter modelos que não estão bem especificados, mas possuem boa performance preditiva. Por exemplo, tente ajustar um [random forest](https://hastie.su.domains/ISLR2/ISLRv2_corrected_June_2023.pdf) em um problema, mesmo $Y \in B(\alpha,\beta)$, em um grande conjunto de dados, e usando um conjunto de teste, calcule o erro quadrático médio observado na amostra independente. Muito provavelmente o *random forest* terá uma capacidade preditiva igual ou superior ao modelo de regressão BP.
@@ -157,11 +157,17 @@ Em que situação os resíduos propostos (resíduo ponderado padronizado) é mel
 
 ## Na avaliação das estatísticas PRESS
 
+PRESS - Soma dos Quadrados dos Erros de Previsão
+
 Para avaliar a capacidade preditiva do modelo, é preciso que a sequência de variáveis aleatórias $(Y_i - \widehat{Y}_i)^2$ sejam i.i.d's, de modo que se você utiliza a mesma amostra para ajustar o modelo e obter $\widehat{Y}$ também para avaliar $d_1^2 = (Y_1 - \widehat{Y}_1)^2, d_2^2 = (Y_2 - \widehat{Y}_2)^2, \cdots, d_m^2 = (Y_m - \widehat{Y}_m)^2$, fazem com que essa sequência não sejam independentes. É preciso ter $m$ novas observações que não foram utilizadas para ajustar o modelo. Não tendo independência, não há garantias da lei dos grandes números para que
 
 $$PRESS \rightarrow \mathbb{E}[(Y - \widehat{Y})^2].$$
 
 Em outras palavras, se foram utilizados as mesmas observações para calcular $\widehat{y}_i$, para todo $i$, então a sequência $(y_i - \widehat{y}_i)^2$ não são observações de uma sequência de variáveis aleatórias independentes, e a aproximação acima não é verdadeira. Essa separação de um conjunto de novas observações é feita em todo procedimento de validação cruzada, como no caso mais geral que é o *leave-one-out cross-validation*. 
+
+## Página 47 $e_{(i)}$
+
+Não seria melhor trocar $e_{(i)} = y_i - \widehat{y}_{(-i)}$ por $r_{(i)}$? O $e_{(i)}$ me induz a pensar no erro que é o que desejamos estimar.
 
 ## AIC
 
@@ -181,4 +187,14 @@ No código das simulações há diversas interções de códigos R com o a funç
   + Onde está `Estimation.R`?
   + Onde está `Residual_H_Log_Like_BP.R`?
   
+Por exemplo, no paper do Marcelo, ele coloca a referência para o repositório do GitHub em que contém o pacote **BPmodel** ([ver aqui](https://github.com/santosneto/BPmodel)) que muito provavelmente você está usando em algum script. 
+  
 É preciso que seu experimento seja totalmente repoduzível. Quem ler quer chegar aos mesmos resultados!
+
+## Por que `i <- i - 1`
+
+No código, na página 88, dentro da instrução `else`, por que fazer `i <- i - 1`? Não há problema teórico, pois na verdade se terá mais réplicas que as 10 mil. Então, na verdade foram realizadas mais de 10 mil répicas de Monte-Carlo.
+
+## Qual o método de otimiação usado em `gamlss`?
+
+Qual o método de otimização utilizado pela função `gamlss`? Seria interessante colocar nas tabelas a taxa de não convergência. Isso é útil, uma vez que não há forma fechada para os estimadores de máxima verossimilhança. Perceber como a otimização numérica performa na maximização da função de log-verossimilhança é uma informação útil.

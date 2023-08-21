@@ -155,7 +155,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="2.2" class="anchored" data-anchor-id="suporte-da-distribuição-bp"><span class="header-section-number">2.2</span> Suporte da distribuição BP</h2>
 <p>O suporte da distribuição da beta prime não inclue o zero (<span class="math inline">\(y \geq 0\)</span>)? Sei que Bourguignon et al.&nbsp;(2021) definiu como <span class="math inline">\(y &gt; 0\)</span>, mas não seria <span class="math inline">\(y \geq 0\)</span>? Note que na página 34 do paper (página 2 do PDF), último parágrafo, ele diz:</p>
 <blockquote class="blockquote">
-<p>Pode-se provar que a função densidade BP está diminuindo com <span class="math inline">\(f(y|\alpha,\beta)\)</span>, se <span class="math inline">\(0 &lt; \alpha &lt; 1\)</span> e f <span class="math inline">\(f(y|\alpha, \beta)\)</span> é decrescente com moda em <span class="math inline">\(y = 0\)</span>. - Bourguignon et al.&nbsp;(2021)</p>
+<p>Pode-se provar que a função densidade BP está diminuindo com <span class="math inline">\(f(y|\alpha,\beta)\)</span>, se <span class="math inline">\(0 &lt; \alpha &lt; 1\)</span> com moda em <span class="math inline">\(y = 0\)</span>. - Bourguignon et al.&nbsp;(2021)</p>
 </blockquote>
 <p>Além disso, nas referências da distribuição <span class="math inline">\(y\geq 0\)</span>.</p>
 <p><strong>Uma observação</strong>: Ela também é conhecida como distribuição de Pearson tipo VI. 🎁</p>
@@ -187,7 +187,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><strong>Data modeling culture</strong>: nela, em geral, se assume que o modelo de regressão utilizado <span class="math inline">\(r({\bf x}) = \mathbb{E}(Y|{\bf X})\)</span> é correto. O principal objetivo dessa abordagem é a interpretação dos parâmetros que indexam o modelo <span class="math inline">\(r({\bf x})\)</span>.</p></li>
 <li><p><strong>Algorithmic modeling culture</strong>: essa é a cultura que domina a comunidade de aprendizagem de máquina. Nessa abordagem, o principal objetivo são as predições por meio de novas observações. Não se assume que o modelo utilizado é o modelo correto. Nesse tipo de modelagem, muitas vezes os algoritmos não envolve nenhuma estrutura probabilística. Muitas vezes, modelos não bem especificado conduzem a boas predições.</p></li>
 </ol>
-<p>Existe uma sequência de respostas à esse paper, por exemplo, estatísticos renomados como o David Cox e o Bradley Efron respondem positivamente à esse paper.</p>
+<p>Existe uma sequência de respostas à esse paper, por exemplo, estatísticos renomados como o David Cox e o Bradley Efron respondem positivamente à esse paper. O artigo possui mais de 5300 citações.</p>
 <p>Podemos ter modelos que não estão bem especificados, mas possuem boa performance preditiva. Por exemplo, tente ajustar um <a href="https://hastie.su.domains/ISLR2/ISLRv2_corrected_June_2023.pdf">random forest</a> em um problema, mesmo <span class="math inline">\(Y \in B(\alpha,\beta)\)</span>, em um grande conjunto de dados, e usando um conjunto de teste, calcule o erro quadrático médio observado na amostra independente. Muito provavelmente o <em>random forest</em> terá uma capacidade preditiva igual ou superior ao modelo de regressão BP.</p>
 <p>Dessa forma, sugiro você comentar um pouco mais qual a grande importância da boa especificação do modelo. Essa boa especificação não está única e exclusivamente na capacidade preditiva do modelo, pois muitas vezes poderemos nos surpreender com modelos não muito bem especificado e que performa muito melhor. A grande contribuição de termos um modelo que esteja bem especificado é permitir que análises interpretativas possam ser realizadas. É preciso destacar isso, uma vez que muitas pessoas que estão lendo materiais da estatística são pessoas da ciência de dados/computação, em que muitas dalas “pregam” que o interesse está na previsão e ofuscam a importância de ter modelos bem especificados quando desejamos perceber a relação entre as variáveis, construir intervalos para os parâmetros e testar hipóteses.</p>
 <p>No material fica um pouco nebuloso de qual a grande ideia de se fazer uma análise de resíduos.</p>
@@ -226,18 +226,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="na-avaliação-das-estatísticas-press" class="level2" data-number="2.10">
 <h2 data-number="2.10" class="anchored" data-anchor-id="na-avaliação-das-estatísticas-press"><span class="header-section-number">2.10</span> Na avaliação das estatísticas PRESS</h2>
+<p>PRESS - Soma dos Quadrados dos Erros de Previsão</p>
 <p>Para avaliar a capacidade preditiva do modelo, é preciso que a sequência de variáveis aleatórias <span class="math inline">\((Y_i - \widehat{Y}_i)^2\)</span> sejam i.i.d’s, de modo que se você utiliza a mesma amostra para ajustar o modelo e obter <span class="math inline">\(\widehat{Y}\)</span> também para avaliar <span class="math inline">\(d_1^2 = (Y_1 - \widehat{Y}_1)^2, d_2^2 = (Y_2 - \widehat{Y}_2)^2, \cdots, d_m^2 = (Y_m - \widehat{Y}_m)^2\)</span>, fazem com que essa sequência não sejam independentes. É preciso ter <span class="math inline">\(m\)</span> novas observações que não foram utilizadas para ajustar o modelo. Não tendo independência, não há garantias da lei dos grandes números para que</p>
 <p><span class="math display">\[PRESS \rightarrow \mathbb{E}[(Y - \widehat{Y})^2].\]</span></p>
 <p>Em outras palavras, se foram utilizados as mesmas observações para calcular <span class="math inline">\(\widehat{y}_i\)</span>, para todo <span class="math inline">\(i\)</span>, então a sequência <span class="math inline">\((y_i - \widehat{y}_i)^2\)</span> não são observações de uma sequência de variáveis aleatórias independentes, e a aproximação acima não é verdadeira. Essa separação de um conjunto de novas observações é feita em todo procedimento de validação cruzada, como no caso mais geral que é o <em>leave-one-out cross-validation</em>.</p>
 </section>
-<section id="aic" class="level2" data-number="2.11">
-<h2 data-number="2.11" class="anchored" data-anchor-id="aic"><span class="header-section-number">2.11</span> AIC</h2>
+<section id="página-47-e_i" class="level2" data-number="2.11">
+<h2 data-number="2.11" class="anchored" data-anchor-id="página-47-e_i"><span class="header-section-number">2.11</span> Página 47 <span class="math inline">\(e_{(i)}\)</span></h2>
+<p>Não seria melhor trocar <span class="math inline">\(e_{(i)} = y_i - \widehat{y}_{(-i)}\)</span> por <span class="math inline">\(r_{(i)}\)</span>? O <span class="math inline">\(e_{(i)}\)</span> me induz a pensar no erro que é o que desejamos estimar.</p>
+</section>
+<section id="aic" class="level2" data-number="2.12">
+<h2 data-number="2.12" class="anchored" data-anchor-id="aic"><span class="header-section-number">2.12</span> AIC</h2>
 <p>Por que vocês não compararam a performance da adequação de ajuste do modelo usando o AIC? O procedimento de <strong>Leave-one-out cross-validation</strong> ao qual se baseia a estatística <span class="math inline">\(PRESS\)</span> (ver Allen 1974), em que</p>
 <p><span class="math display">\[PRESS = \sum_{i = 1}^n (Y - \widehat{Y}_{(i)})^2.\]</span> Só que Stones, um pouco depois, em 1977, mostro que <strong>Leave-one-out cross-validation</strong> converge assintoticamente para o método AIC. Vocês possuem a estrutura probabilística do modelo que permite o cálculo analítico do AIC. Portanto, avaliar o risco preditivo usando o AIC já seria suficiente, i.e, seria o melhor resultado assintótico do <strong>leave-one-out</strong>. Leia o artigo <a href="https://www.jstor.org/stable/2984877">An Asymptotic Equivalence of Choice of Models by Cross-validation and Akaike’s Criterion</a>. Esse paper é citado em mais de 1500 trabalhos.</p>
 <p>Sugiro que seja comparado também com o AIC, uma vez que isso é facilmente feito.</p>
 </section>
-<section id="cadê-os-demais-códigos" class="level2" data-number="2.12">
-<h2 data-number="2.12" class="anchored" data-anchor-id="cadê-os-demais-códigos"><span class="header-section-number">2.12</span> Cadê os demais códigos?</h2>
+<section id="cadê-os-demais-códigos" class="level2" data-number="2.13">
+<h2 data-number="2.13" class="anchored" data-anchor-id="cadê-os-demais-códigos"><span class="header-section-number">2.13</span> Cadê os demais códigos?</h2>
 <p>No código das simulações há diversas interções de códigos R com o a função <code>source()</code>. Onde estão esses arquivos. Sugiro criar uma conta no <a href="https://github.com/">GitHub</a> e criar um repositório com o script R e um pequeno comentário do que cada código faz.</p>
 <ul>
 <li>Onde está <code>gamlss_BP.R</code>?</li>
@@ -245,7 +250,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Onde está <code>Estimation.R</code>?</li>
 <li>Onde está <code>Residual_H_Log_Like_BP.R</code>?</li>
 </ul>
+<p>Por exemplo, no paper do Marcelo, ele coloca a referência para o repositório do GitHub em que contém o pacote <strong>BPmodel</strong> (<a href="https://github.com/santosneto/BPmodel">ver aqui</a>) que muito provavelmente você está usando em algum script.</p>
 <p>É preciso que seu experimento seja totalmente repoduzível. Quem ler quer chegar aos mesmos resultados!</p>
+</section>
+<section id="por-que-i---i---1" class="level2" data-number="2.14">
+<h2 data-number="2.14" class="anchored" data-anchor-id="por-que-i---i---1"><span class="header-section-number">2.14</span> Por que <code>i &lt;- i - 1</code></h2>
+<p>No código, na página 88, dentro da instrução <code>else</code>, por que fazer <code>i &lt;- i - 1</code>? Não há problema teórico, pois na verdade se terá mais réplicas que as 10 mil. Então, na verdade foram realizadas mais de 10 mil répicas de Monte-Carlo.</p>
+</section>
+<section id="qual-o-método-de-otimiação-usado-em-gamlss" class="level2" data-number="2.15">
+<h2 data-number="2.15" class="anchored" data-anchor-id="qual-o-método-de-otimiação-usado-em-gamlss"><span class="header-section-number">2.15</span> Qual o método de otimiação usado em <code>gamlss</code>?</h2>
+<p>Qual o método de otimização utilizado pela função <code>gamlss</code>? Seria interessante colocar nas tabelas a taxa de não convergência. Isso é útil, uma vez que não há forma fechada para os estimadores de máxima verossimilhança. Perceber como a otimização numérica performa na maximização da função de log-verossimilhança é uma informação útil.</p>
 <!-- -->
 
 </section>
@@ -665,7 +679,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>O suporte da distribuição da beta prime não inclue o zero ($y \geq 0$)? Sei que Bourguignon et al. (2021) definiu como $y &gt; 0$, mas não seria $y \geq 0$? Note que na página 34 do paper (página 2 do PDF), último parágrafo, ele diz:</span>
 <span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Pode-se provar que a função densidade BP está diminuindo com $f(y|\alpha,\beta)$, se $0 &lt; \alpha &lt; 1$ e f $f(y|\alpha, \beta)$ é decrescente com moda em $y = 0$. - Bourguignon et al. (2021)</span></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Pode-se provar que a função densidade BP está diminuindo com $f(y|\alpha,\beta)$, se $0 &lt; \alpha &lt; 1$ com moda em $y = 0$. - Bourguignon et al. (2021)</span></span>
 <span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>Além disso, nas referências da distribuição $y\geq 0$.</span>
 <span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a></span>
@@ -707,7 +721,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Algorithmic modeling culture**: essa é a cultura que domina a comunidade de aprendizagem de máquina. Nessa abordagem, o principal objetivo são as predições por meio de novas observações. Não se assume que o modelo utilizado é o modelo correto. Nesse tipo de modelagem, muitas vezes os algoritmos não envolve nenhuma estrutura probabilística. Muitas vezes, modelos não bem especificado conduzem a boas predições.</span>
 <span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>Existe uma sequência de respostas à esse paper, por exemplo, estatísticos renomados como o David Cox e o Bradley Efron respondem positivamente à esse paper.</span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>Existe uma sequência de respostas à esse paper, por exemplo, estatísticos renomados como o David Cox e o Bradley Efron respondem positivamente à esse paper. O artigo possui mais de 5300 citações.</span>
 <span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a>Podemos ter modelos que não estão bem especificados, mas possuem boa performance preditiva. Por exemplo, tente ajustar um <span class="co">[</span><span class="ot">random forest</span><span class="co">](https://hastie.su.domains/ISLR2/ISLRv2_corrected_June_2023.pdf)</span> em um problema, mesmo $Y \in B(\alpha,\beta)$, em um grande conjunto de dados, e usando um conjunto de teste, calcule o erro quadrático médio observado na amostra independente. Muito provavelmente o *random forest* terá uma capacidade preditiva igual ou superior ao modelo de regressão BP.</span>
@@ -759,31 +773,47 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-157"><a href="#cb1-157" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-158"><a href="#cb1-158" aria-hidden="true" tabindex="-1"></a><span class="fu">## Na avaliação das estatísticas PRESS</span></span>
 <span id="cb1-159"><a href="#cb1-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-160"><a href="#cb1-160" aria-hidden="true" tabindex="-1"></a>Para avaliar a capacidade preditiva do modelo, é preciso que a sequência de variáveis aleatórias $(Y_i - \widehat{Y}_i)^2$ sejam i.i.d's, de modo que se você utiliza a mesma amostra para ajustar o modelo e obter $\widehat{Y}$ também para avaliar $d_1^2 = (Y_1 - \widehat{Y}_1)^2, d_2^2 = (Y_2 - \widehat{Y}_2)^2, \cdots, d_m^2 = (Y_m - \widehat{Y}_m)^2$, fazem com que essa sequência não sejam independentes. É preciso ter $m$ novas observações que não foram utilizadas para ajustar o modelo. Não tendo independência, não há garantias da lei dos grandes números para que</span>
+<span id="cb1-160"><a href="#cb1-160" aria-hidden="true" tabindex="-1"></a>PRESS - Soma dos Quadrados dos Erros de Previsão</span>
 <span id="cb1-161"><a href="#cb1-161" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-162"><a href="#cb1-162" aria-hidden="true" tabindex="-1"></a>$$PRESS \rightarrow \mathbb{E}<span class="co">[</span><span class="ot">(Y - \widehat{Y})^2</span><span class="co">]</span>.$$</span>
+<span id="cb1-162"><a href="#cb1-162" aria-hidden="true" tabindex="-1"></a>Para avaliar a capacidade preditiva do modelo, é preciso que a sequência de variáveis aleatórias $(Y_i - \widehat{Y}_i)^2$ sejam i.i.d's, de modo que se você utiliza a mesma amostra para ajustar o modelo e obter $\widehat{Y}$ também para avaliar $d_1^2 = (Y_1 - \widehat{Y}_1)^2, d_2^2 = (Y_2 - \widehat{Y}_2)^2, \cdots, d_m^2 = (Y_m - \widehat{Y}_m)^2$, fazem com que essa sequência não sejam independentes. É preciso ter $m$ novas observações que não foram utilizadas para ajustar o modelo. Não tendo independência, não há garantias da lei dos grandes números para que</span>
 <span id="cb1-163"><a href="#cb1-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-164"><a href="#cb1-164" aria-hidden="true" tabindex="-1"></a>Em outras palavras, se foram utilizados as mesmas observações para calcular $\widehat{y}_i$, para todo $i$, então a sequência $(y_i - \widehat{y}_i)^2$ não são observações de uma sequência de variáveis aleatórias independentes, e a aproximação acima não é verdadeira. Essa separação de um conjunto de novas observações é feita em todo procedimento de validação cruzada, como no caso mais geral que é o *leave-one-out cross-validation*. </span>
+<span id="cb1-164"><a href="#cb1-164" aria-hidden="true" tabindex="-1"></a>$$PRESS \rightarrow \mathbb{E}<span class="co">[</span><span class="ot">(Y - \widehat{Y})^2</span><span class="co">]</span>.$$</span>
 <span id="cb1-165"><a href="#cb1-165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-166"><a href="#cb1-166" aria-hidden="true" tabindex="-1"></a><span class="fu">## AIC</span></span>
+<span id="cb1-166"><a href="#cb1-166" aria-hidden="true" tabindex="-1"></a>Em outras palavras, se foram utilizados as mesmas observações para calcular $\widehat{y}_i$, para todo $i$, então a sequência $(y_i - \widehat{y}_i)^2$ não são observações de uma sequência de variáveis aleatórias independentes, e a aproximação acima não é verdadeira. Essa separação de um conjunto de novas observações é feita em todo procedimento de validação cruzada, como no caso mais geral que é o *leave-one-out cross-validation*. </span>
 <span id="cb1-167"><a href="#cb1-167" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-168"><a href="#cb1-168" aria-hidden="true" tabindex="-1"></a>Por que vocês não compararam a performance da adequação de ajuste do modelo usando o AIC? O procedimento de **Leave-one-out cross-validation** ao qual se baseia a estatística $PRESS$ (ver Allen 1974), em que</span>
+<span id="cb1-168"><a href="#cb1-168" aria-hidden="true" tabindex="-1"></a><span class="fu">## Página 47 $e_{(i)}$</span></span>
 <span id="cb1-169"><a href="#cb1-169" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-170"><a href="#cb1-170" aria-hidden="true" tabindex="-1"></a>$$PRESS = \sum_{i = 1}^n (Y - \widehat{Y}_{(i)})^2.$$</span>
-<span id="cb1-171"><a href="#cb1-171" aria-hidden="true" tabindex="-1"></a>Só que Stones, um pouco depois, em 1977, mostro que **Leave-one-out cross-validation** converge assintoticamente para o método AIC. Vocês possuem a estrutura probabilística do modelo que permite o cálculo analítico do AIC. Portanto, avaliar o risco preditivo usando o AIC já seria suficiente, i.e, seria o melhor resultado assintótico do **leave-one-out**. Leia o artigo <span class="co">[</span><span class="ot">An Asymptotic Equivalence of Choice of Models by Cross-validation and Akaike's Criterion</span><span class="co">](https://www.jstor.org/stable/2984877)</span>. Esse paper é citado em mais de 1500 trabalhos.</span>
-<span id="cb1-172"><a href="#cb1-172" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-173"><a href="#cb1-173" aria-hidden="true" tabindex="-1"></a>Sugiro que seja comparado também com o AIC, uma vez que isso é facilmente feito.</span>
-<span id="cb1-174"><a href="#cb1-174" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-175"><a href="#cb1-175" aria-hidden="true" tabindex="-1"></a><span class="fu">## Cadê os demais códigos?</span></span>
-<span id="cb1-176"><a href="#cb1-176" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-177"><a href="#cb1-177" aria-hidden="true" tabindex="-1"></a>No código das simulações há diversas interções de códigos R com o a função <span class="in">`source()`</span>. Onde estão esses arquivos. Sugiro criar uma conta no <span class="co">[</span><span class="ot">GitHub</span><span class="co">](https://github.com/)</span> e criar um repositório com o script R e um pequeno comentário do que cada código faz.</span>
+<span id="cb1-170"><a href="#cb1-170" aria-hidden="true" tabindex="-1"></a>Não seria melhor trocar $e_{(i)} = y_i - \widehat{y}_{(-i)}$ por $r_{(i)}$? O $e_{(i)}$ me induz a pensar no erro que é o que desejamos estimar.</span>
+<span id="cb1-171"><a href="#cb1-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-172"><a href="#cb1-172" aria-hidden="true" tabindex="-1"></a><span class="fu">## AIC</span></span>
+<span id="cb1-173"><a href="#cb1-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-174"><a href="#cb1-174" aria-hidden="true" tabindex="-1"></a>Por que vocês não compararam a performance da adequação de ajuste do modelo usando o AIC? O procedimento de **Leave-one-out cross-validation** ao qual se baseia a estatística $PRESS$ (ver Allen 1974), em que</span>
+<span id="cb1-175"><a href="#cb1-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-176"><a href="#cb1-176" aria-hidden="true" tabindex="-1"></a>$$PRESS = \sum_{i = 1}^n (Y - \widehat{Y}_{(i)})^2.$$</span>
+<span id="cb1-177"><a href="#cb1-177" aria-hidden="true" tabindex="-1"></a>Só que Stones, um pouco depois, em 1977, mostro que **Leave-one-out cross-validation** converge assintoticamente para o método AIC. Vocês possuem a estrutura probabilística do modelo que permite o cálculo analítico do AIC. Portanto, avaliar o risco preditivo usando o AIC já seria suficiente, i.e, seria o melhor resultado assintótico do **leave-one-out**. Leia o artigo <span class="co">[</span><span class="ot">An Asymptotic Equivalence of Choice of Models by Cross-validation and Akaike's Criterion</span><span class="co">](https://www.jstor.org/stable/2984877)</span>. Esse paper é citado em mais de 1500 trabalhos.</span>
 <span id="cb1-178"><a href="#cb1-178" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-179"><a href="#cb1-179" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>Onde está <span class="in">`gamlss_BP.R`</span>?</span>
-<span id="cb1-180"><a href="#cb1-180" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>Onde está <span class="in">`glmBP.R`</span>?</span>
-<span id="cb1-181"><a href="#cb1-181" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>Onde está <span class="in">`Estimation.R`</span>?</span>
-<span id="cb1-182"><a href="#cb1-182" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>Onde está <span class="in">`Residual_H_Log_Like_BP.R`</span>?</span>
-<span id="cb1-183"><a href="#cb1-183" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-184"><a href="#cb1-184" aria-hidden="true" tabindex="-1"></a>É preciso que seu experimento seja totalmente repoduzível. Quem ler quer chegar aos mesmos resultados!</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-179"><a href="#cb1-179" aria-hidden="true" tabindex="-1"></a>Sugiro que seja comparado também com o AIC, uma vez que isso é facilmente feito.</span>
+<span id="cb1-180"><a href="#cb1-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-181"><a href="#cb1-181" aria-hidden="true" tabindex="-1"></a><span class="fu">## Cadê os demais códigos?</span></span>
+<span id="cb1-182"><a href="#cb1-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-183"><a href="#cb1-183" aria-hidden="true" tabindex="-1"></a>No código das simulações há diversas interções de códigos R com o a função <span class="in">`source()`</span>. Onde estão esses arquivos. Sugiro criar uma conta no <span class="co">[</span><span class="ot">GitHub</span><span class="co">](https://github.com/)</span> e criar um repositório com o script R e um pequeno comentário do que cada código faz.</span>
+<span id="cb1-184"><a href="#cb1-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-185"><a href="#cb1-185" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>Onde está <span class="in">`gamlss_BP.R`</span>?</span>
+<span id="cb1-186"><a href="#cb1-186" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>Onde está <span class="in">`glmBP.R`</span>?</span>
+<span id="cb1-187"><a href="#cb1-187" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>Onde está <span class="in">`Estimation.R`</span>?</span>
+<span id="cb1-188"><a href="#cb1-188" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>Onde está <span class="in">`Residual_H_Log_Like_BP.R`</span>?</span>
+<span id="cb1-189"><a href="#cb1-189" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-190"><a href="#cb1-190" aria-hidden="true" tabindex="-1"></a>Por exemplo, no paper do Marcelo, ele coloca a referência para o repositório do GitHub em que contém o pacote **BPmodel** (<span class="co">[</span><span class="ot">ver aqui</span><span class="co">](https://github.com/santosneto/BPmodel)</span>) que muito provavelmente você está usando em algum script. </span>
+<span id="cb1-191"><a href="#cb1-191" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-192"><a href="#cb1-192" aria-hidden="true" tabindex="-1"></a>É preciso que seu experimento seja totalmente repoduzível. Quem ler quer chegar aos mesmos resultados!</span>
+<span id="cb1-193"><a href="#cb1-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-194"><a href="#cb1-194" aria-hidden="true" tabindex="-1"></a><span class="fu">## Por que `i &lt;- i - 1`</span></span>
+<span id="cb1-195"><a href="#cb1-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-196"><a href="#cb1-196" aria-hidden="true" tabindex="-1"></a>No código, na página 88, dentro da instrução <span class="in">`else`</span>, por que fazer <span class="in">`i &lt;- i - 1`</span>? Não há problema teórico, pois na verdade se terá mais réplicas que as 10 mil. Então, na verdade foram realizadas mais de 10 mil répicas de Monte-Carlo.</span>
+<span id="cb1-197"><a href="#cb1-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-198"><a href="#cb1-198" aria-hidden="true" tabindex="-1"></a><span class="fu">## Qual o método de otimiação usado em `gamlss`?</span></span>
+<span id="cb1-199"><a href="#cb1-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-200"><a href="#cb1-200" aria-hidden="true" tabindex="-1"></a>Qual o método de otimização utilizado pela função <span class="in">`gamlss`</span>? Seria interessante colocar nas tabelas a taxa de não convergência. Isso é útil, uma vez que não há forma fechada para os estimadores de máxima verossimilhança. Perceber como a otimização numérica performa na maximização da função de log-verossimilhança é uma informação útil.</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
