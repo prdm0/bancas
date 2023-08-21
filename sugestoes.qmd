@@ -23,7 +23,8 @@ Os objetivos principais do trabalho são:
 3. Aqui foram considerados os resíduo:
   + resíduos ponderado;
   + **ponderado padronizado**. Esse foi o resíduo proposto;
-  + Pearson padronizado.
+  + Pearson padronizado;
+  + Foi proposto coeficiente de predição $P^2$.
 
 4. Avalia-se a distribuição empírica dos
 resíduos em diferentes cenários do modelo de regressão BP e comparamos seus desempenhos
@@ -37,7 +38,26 @@ para detectar especificação incorreta.
 $$f(y;\alpha, \beta) = \frac{y^{\alpha - 1}(1 + y)^{-(\alpha + \beta)}}{B(\alpha, \beta)}, y \geq 0,$$
 com $\alpha > 0$ e  $\beta > 0$.
 
+8. Notações:
+
++ $r_i^Q$: resíduo quantílico;
++ $r_i^P$: resíduo de Pearson;
++ $r^{\beta}$: resíduo poderado;
++ $r^{\beta*}$: resíduo ponderado padronizado;
++ $r^{P *}$: resíduo de Pearson padronizado.
+
 # Seguestões e comentários
+
+## O que é definir os resíduos ponderado e Pearson padronizado?
+
+No resumo você diz: 
+
+> "além do resíduo quantílico e do
+resíduo de Pearson utilizados por Bourguignon et al. (2021), **definimos** os resíduos ponderado,
+ponderado padronizado (ESPINHEIRA et al., 2008) e Pearson padronizado (MCCULLAGH;
+NELDER, 1989) para tal modelo." -- Maria Eduarda
+
+O que é definir os resíudos? Não seria melhor trocar definir por "avaliamos"? Eles não já foram definidos pelos autores de uma forma genérica? Definir tem conotação de que vocês criaram.
 
 ## Suporte da distribuição BP
 
@@ -49,16 +69,33 @@ Além disso, nas referências da distribuição $y\geq 0$.
 
 **Uma observação**: Ela também é conhecida como distribuição de Pearson tipo VI. 🎁
 
+<!-- ## Estudar se a distribuição normal é uma boa aproximação? -->
+
+<!-- No trabalho vocês estudam se a distribuição normal-padrão é uma boa aproximação para os resíduos.  -->
+
+<!-- > "Em particular, objetivamos verificar se a distribuição normal -->
+<!-- padrão é uma boa aproximação para a distribuição empírica desses cinco resíduos, quando o -->
+<!-- modelo de regressão BP é corretamente especificado, e analisar seus desempenhos para detectar -->
+<!-- erros de especificação." -- Maria Eduarda -->
+
+<!-- Isso já não seria esperado pelo Teorema Central do Limite - TCL? Se eu tenho uma sequência de variáveis aleatórias i.i.d's, não é esperado se tenho dados suficientes, terei uma boa aproximação? Por que simular isso se eu tenho garantias teóricas da boa aproximação? -->
+
+
 ## Utilizar a teoria da informação
 
 A ideia do estudo é a avaliação dos resíduos para a análise da especificação do modelo de regressão beta prime. Portanto, queremos estimar $r({\bf x}) = \mathbb{E}(Y|X)$, ou seja, desejamos uma função de regressão com boa capacidade preditiva. Uma das suposiões é que $Y\sim BP$. 
 
-Pergunta: em cenários em que $Y$ segue a distribuição aproximadamente BP, utilizar estatísticas de adequação de ajuste para comparar a regressão BP com outros modelos de regressão, a exemplo, dos MGL's, como, por exemplo, com o modelo MLG com $Y \sim Gama$, a análise de resíduos proposta não levam as mesmas conclusões de que chegaríamos em uma análise de resíduo? Por exemplo, utilizar estatísticas como a estatística de Cramér-von Mises e Anderson-Darling para modelos não encaixados não poderia ser útil para comparar a distribuição de $Y$ e decidir qual modelo melhor se ajusta aos dados? Realizar uma validação cruzada para perceber qual modelo performa melhor é uma alternativa. Existem situações em que uma validação cruzada me apontaria para uma decisão equivocada ou diferente que a análise de resíduo? E o contrário?
-
+Pergunta: em cenários em que $Y$ segue a distribuição aproximadamente BP, utilizar estatísticas de adequação de ajuste para comparar a regressão BP com outros modelos de regressão, a exemplo, dos MGL's, como, por exemplo, com o modelo MLG com $Y \sim Gama$, a análise de resíduos proposta não levam as mesmas conclusões de que chegaríamos em uma análise de resíduo? Por exemplo, utilizar estatísticas como a estatística de Cramér-von Mises e Anderson-Darling para modelos não encaixados não poderia ser útil para comparar a distribuição de $Y$ e decidir qual modelo melhor se ajusta aos dados? 
 
 ## Especificação correta garante boa capacidade preditiva?
 
-A especificação adequada do modelo garante boa capacidade preditiva? Segundo a lógica de aprendizagem de máquina não! Ver o paper do Leio Breiman:
+A especificação adequada do modelo garante boa capacidade preditiva? No resumo você diz:
+
+> "Para isso, é importante utilizar resíduos com propriedades
+conhecidas e que apresentem bom desempenho." - Maria Eduarda
+
+
+Segundo a lógica de aprendizagem de máquina não! Ver o paper do Leio Breiman:
 
 > [Breiman, L. (2001a). Statistical modeling: The two cultures. Statistical Science, 16(3), 199–231](https://projecteuclid.org/journalArticle/Download?urlId=10.1214%2Fss%2F1009213726)
 
@@ -77,11 +114,13 @@ Dessa forma, sugiro você comentar um pouco mais qual a grande importância da b
 
 No material fica um pouco nebuloso de qual a grande ideia de se fazer uma análise de resíduos.
 
+## avaliamos a distribuição empírica dos resíduos
+
+Vocês fazem uma análise de distribuição empírica do resíduo, para detecção da especificação incorreta do modelo de regressão BP. Existe um apelo frequentista, uma vez que necessita-se de uma aproximação assintótica da distribuição dos resíduos para a normal. Até que ponto, essa análise é melhor que utilizar a teoria da informação e estudar a distribuição de $Y$, sobretudo em situações em que temos poucos dados ou uma quantidade moderada de dados?
 
 ## Pensam em adicionar penalização?
 
 Sei que vocês focaram em desenvolver inferência para auxiliar a análise de especificação do modelo de regressão BP. Porém, vocês pensaram dar passos para avançar o modelo de regressão BP, por exemplo, pensam em adicionar algum tipo de penalização no modelo de regressão beta prime? Existe um *trade off* entre viés e variância, em que uma penalização poderia fazer com que o modelo viesse performar melhor. Um estudo avaliando a peformance do modelo com e sem penalização, em diversos cenários poderia ser interessante.
-
 
 ## A variância do modelo de regressão BP é maior? Como assim?
 
@@ -112,6 +151,26 @@ ajustados pelo modelo de regressão BP. - Maria Eduarda, página 41, primeira li
 
 O que tem que ser preciso são os modelos. Acho que você se refere à convergência assintótica das estimativas dos erros, nesse caso, do estimador do resíduo ponderado padronizado, denotado no trabalho por $r_i^{\beta^*}$ para a distribuição normal. Daí, quando $n \rightarrow +\infty$ temos que pela Teorema Central do Limite, $r_i^{\beta^*}$ deve convergir em distribuição para a distribuição normal. **Precisão de dados** tem outra conotação!
 
+## Em qual situação $r_i^{\beta *}$ é melhor que $r_i^{Q}$
+
+Em que situação os resíduos propostos (resíduo ponderado padronizado) é melhor que utilizar o $r_i^{Q}$? Ao fim, existe alguma situação que eu devo utilizar $r_i^{\beta *}$?
+
+## Na avaliação das estatísticas PRESS
+
+Para avaliar a capacidade preditiva do modelo, é preciso que a sequência de variáveis aleatórias $(Y_i - \widehat{Y}_i)^2$ sejam i.i.d's, de modo que se você utiliza a mesma amostra para ajustar o modelo e obter $\widehat{Y}$ também para avaliar $d_1^2 = (Y_1 - \widehat{Y}_1)^2, d_2^2 = (Y_2 - \widehat{Y}_2)^2, \cdots, d_m^2 = (Y_m - \widehat{Y}_m)^2$, fazem com que essa sequência não sejam independentes. É preciso ter $m$ novas observações que não foram utilizadas para ajustar o modelo. Não tendo independência, não há garantias da lei dos grandes números para que
+
+$$PRESS \rightarrow \mathbb{E}[(Y - \widehat{Y})^2].$$
+
+Em outras palavras, se foram utilizados as mesmas observações para calcular $\widehat{y}_i$, para todo $i$, então a sequência $(y_i - \widehat{y}_i)^2$ não são observações de uma sequência de variáveis aleatórias independentes, e a aproximação acima não é verdadeira. Essa separação de um conjunto de novas observações é feita em todo procedimento de validação cruzada, como no caso mais geral que é o *leave-one-out cross-validation*. 
+
+## AIC
+
+Por que vocês não compararam a performance da adequação de ajuste do modelo usando o AIC? O procedimento de **Leave-one-out cross-validation** ao qual se baseia a estatística $PRESS$ (ver Allen 1974), em que
+
+$$PRESS = \sum_{i = 1}^n (Y - \widehat{Y}_{(i)})^2.$$
+Só que Stones, um pouco depois, em 1977, mostro que **Leave-one-out cross-validation** converge assintoticamente para o método AIC. Vocês possuem a estrutura probabilística do modelo que permite o cálculo analítico do AIC. Portanto, avaliar o risco preditivo usando o AIC já seria suficiente, i.e, seria o melhor resultado assintótico do **leave-one-out**. Leia o artigo [An Asymptotic Equivalence of Choice of Models by Cross-validation and Akaike's Criterion](https://www.jstor.org/stable/2984877). Esse paper é citado em mais de 1500 trabalhos.
+
+Sugiro que seja comparado também com o AIC, uma vez que isso é facilmente feito.
 
 ## Cadê os demais códigos?
 
