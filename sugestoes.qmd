@@ -20,12 +20,12 @@ Os objetivos principais do trabalho são:
 
 2. Bourguignon et al. (2021) considerou os resíduo quantílico e do de Pearson;
 
-3. Aqui foram considerados os resíduo
+3. Aqui foram considerados os resíduo:
   + resíduos ponderado;
   + **ponderado padronizado**. Esse foi o resíduo proposto;
   + Pearson padronizado.
 
-4. Avalia-se a distribuição empírica desses cinco (dois do trabalho do Marcelo e 3 novos)
+4. Avalia-se a distribuição empírica dos
 resíduos em diferentes cenários do modelo de regressão BP e comparamos seus desempenhos
 para detectar especificação incorreta.
 
@@ -41,7 +41,7 @@ com $\alpha > 0$ e  $\beta > 0$.
 
 ## Suporte da distribuição BP
 
-O suporte da distribuição da beta prime não inclue o zero, i.e., $y > 0$? Sei que Bourguignon et al. (2021) definiu como $y > 0$, mas não seria $y \geq 0$? Note que na página 34 do paper (página 2 do PDF), último parágrafo, ele diz:
+O suporte da distribuição da beta prime não inclue o zero ($y \geq 0$)? Sei que Bourguignon et al. (2021) definiu como $y > 0$, mas não seria $y \geq 0$? Note que na página 34 do paper (página 2 do PDF), último parágrafo, ele diz:
 
 > Pode-se provar que a função densidade BP está diminuindo com $f(y|\alpha,\beta)$, se $0 < \alpha < 1$ e f $f(y|\alpha, \beta)$ é decrescente com moda em $y = 0$. - Bourguignon et al. (2021)
 
@@ -51,17 +51,41 @@ Além disso, nas referências da distribuição $y\geq 0$.
 
 ## Utilizar a teoria da informação
 
-A ideia do estudo é a avaliação dos resíduos para a análise da especificação do modelo de regressão beta prime. Portanto, queremos estimar $r({\bf x}) = \mathbb{E}(Y|X)$, ou seja, desejamos uma função de regressão com boa capacidade preditiva. Uma das suposiões é que $Y\sim BP$. Pergunta: em cenários em que $Y$ segue a distribuição aproximadamente BP, utilizar estatísticas de adequação de ajuste para comparar a regressão BP com outros modelos de regressão, a exemplo, dos MGL's, por exemplo com $Y \sim Gama$, a análise de resíduos proposta não levam as mesmas conclusões de que chegaríamos em uma análise de resíduo? Por exemplo, utilizar estatísticas modificações de estatísticas como a Cramér-von Mises e Anderson-Darling para modelos não encaixados não poderia ser útil para comparar a distribuição de $Y$ e decidir qual modelo melhor se ajusta aos dados?
+A ideia do estudo é a avaliação dos resíduos para a análise da especificação do modelo de regressão beta prime. Portanto, queremos estimar $r({\bf x}) = \mathbb{E}(Y|X)$, ou seja, desejamos uma função de regressão com boa capacidade preditiva. Uma das suposiões é que $Y\sim BP$. 
+
+Pergunta: em cenários em que $Y$ segue a distribuição aproximadamente BP, utilizar estatísticas de adequação de ajuste para comparar a regressão BP com outros modelos de regressão, a exemplo, dos MGL's, como, por exemplo, com o modelo MLG com $Y \sim Gama$, a análise de resíduos proposta não levam as mesmas conclusões de que chegaríamos em uma análise de resíduo? Por exemplo, utilizar estatísticas como a estatística de Cramér-von Mises e Anderson-Darling para modelos não encaixados não poderia ser útil para comparar a distribuição de $Y$ e decidir qual modelo melhor se ajusta aos dados? Realizar uma validação cruzada para perceber qual modelo performa melhor é uma alternativa. Existem situações em que uma validação cruzada me apontaria para uma decisão equivocada ou diferente que a análise de resíduo? E o contrário?
+
 
 ## Especificação correta garante boa capacidade preditiva?
 
-A especificação adequada do modelo garante boa capacidade preditiva? Segundo a lógica de aprendizagem de máquina não! Podemos ter modelos que não estão bem especificados, mas possuem boa performance preditiva. Por exemplo, tente ajustar um [random forest](https://hastie.su.domains/ISLR2/ISLRv2_corrected_June_2023.pdf) em um problema, mesmo $Y \in B(\alpha,\beta)$, em um grande conjunto de dados, e usando um conjunto de teste, calcule o erro quadrático médio observado na amostra independente. Muito provavelmente o *random forest* terá uma capacidade preditivo igual ou superior ao modelo de regressão beta prime.
+A especificação adequada do modelo garante boa capacidade preditiva? Segundo a lógica de aprendizagem de máquina não! Ver o paper do Leio Breiman:
+
+> [Breiman, L. (2001a). Statistical modeling: The two cultures. Statistical Science, 16(3), 199–231](https://projecteuclid.org/journalArticle/Download?urlId=10.1214%2Fss%2F1009213726)
+
+Nesse artigo ele estabelece duas culturas na modelagem estatística:
+
+1. **Data modeling culture**: nela, em geral, se assume que o modelo de regressão utilizado $r({\bf x}) = \mathbb{E}(Y|{\bf X})$ é correto. O principal objetivo dessa abordagem é a interpretação dos parâmetros que indexam o modelo $r({\bf x})$.
+
+2. **Algorithmic modeling culture**: essa é a cultura que domina a comunidade de aprendizagem de máquina. Nessa abordagem, o principal objetivo são as predições por meio de novas observações. Não se assume que o modelo utilizado é o modelo correto. Nesse tipo de modelagem, muitas vezes os algoritmos não envolve nenhuma estrutura probabilística. Muitas vezes, modelos não bem especificado conduzem a boas predições.
+
+Existe uma sequência de respostas à esse paper, por exemplo, estatísticos renomados como o David Cox e o Bradley Efron respondem positivamente à esse paper.
+
+
+Podemos ter modelos que não estão bem especificados, mas possuem boa performance preditiva. Por exemplo, tente ajustar um [random forest](https://hastie.su.domains/ISLR2/ISLRv2_corrected_June_2023.pdf) em um problema, mesmo $Y \in B(\alpha,\beta)$, em um grande conjunto de dados, e usando um conjunto de teste, calcule o erro quadrático médio observado na amostra independente. Muito provavelmente o *random forest* terá uma capacidade preditiva igual ou superior ao modelo de regressão BP.
+
+Dessa forma, sugiro você comentar um pouco mais qual a grande importância da boa especificação do modelo. Essa boa especificação não está única e exclusivamente na capacidade preditiva do modelo, pois muitas vezes poderemos nos surpreender com modelos não muito bem especificado e que performa muito melhor. A grande contribuição de termos um modelo que esteja bem especificado é permitir que análises interpretativas possam ser realizadas. É preciso destacar isso, uma vez que muitas pessoas que estão lendo materiais da estatística são pessoas da ciência de dados/computação, em que muitas dalas "pregam" que o interesse está na previsão e ofuscam a importância de ter modelos bem especificados quando desejamos perceber a relação entre as variáveis, construir intervalos para os parâmetros e testar hipóteses.
+
+No material fica um pouco nebuloso de qual a grande ideia de se fazer uma análise de resíduos.
+
 
 ## Pensam em adicionar penalização?
 
-Vocês pensaram em adicionar algum tipo de penalização no modelo de regressão beta prime? Existe um *trade off* entre viés e variância. Dessa forma, até que ponto as estatísticas de análise de resíduos refletem isso? Podemos ter um modelo não-viesado, porém com uma alta variância, i.e., *overfitting*. Esses modelos não tem boa performance preditiva! As vezes preferimos modelos um pouco mais viesados mas com variância baixa! 
+Sei que vocês focaram em desenvolver inferência para auxiliar a análise de especificação do modelo de regressão BP. Porém, vocês pensaram dar passos para avançar o modelo de regressão BP, por exemplo, pensam em adicionar algum tipo de penalização no modelo de regressão beta prime? Existe um *trade off* entre viés e variância, em que uma penalização poderia fazer com que o modelo viesse performar melhor. Um estudo avaliando a peformance do modelo com e sem penalização, em diversos cenários poderia ser interessante.
 
-## a variância do modelo de regressão BP é maior
+
+## A variância do modelo de regressão BP é maior? Como assim?
+
+Você diz:
 
 > "Uma das vantagens refere-se à modelagem de dados mais dispersos, uma vez que a variância do
 modelo de regressão BP é maior que a variância do modelo gama." - Maria Eduarda, página 12
@@ -71,6 +95,10 @@ Você refere-se à variância do modelo ou a capacidade do modelo em modelar $Y$
 $$R(\widehat{g}) = \mathbb{E}\left[(Y - \widehat{g}({\bf X}))^2| {\bf X} = {\bf x}\right] = \underbrace{\mathbb{V}[Y | {\bf X = x}]}_{\mathrm{i - Variância\,\, intrínseca}} + \overbrace{(r({\bf x}) - \mathbb{E}[\widehat{g}({\bf x})])^2}^{\mathrm{ii - Viés\, ao\, quadrado\, do\, modelo}} + \underbrace{\mathbb{V}[\widehat{g}({\bf x})]}_{\mathrm{iii - Variância\, do\, modelo}},$$ 
 
 em que $\widehat{g}(\cdot)$ é sua função de regressão estimada. Quando você diz que a variância do modelo de regressão BP é maior, você não está dizendo que iii é maior? Isso não me daria um maior risco preditivo? Escreva melhor o que você está querendo dizer com variância maior!
+
+Muito provavelmente existem diversas sequências de observações de $Y$ em que poderiam ser bem modeladas pela distribuição Gama e também pela distribuição BP. Se o modelo de regressão BP tem variância maior, poderia entender que modelar por um MLG eu teria um modelo que performa melhor? Como foi verificado que a variância do modelo é maior! Isso é realmente algo bom?
+
+Você não estaria querendo dizer que o modelo de regressão BP modela dados mais dispersos? Isso pode ser diferente de um modelo com variância maior.
 
 
 ## O que é precisão dos dados?
