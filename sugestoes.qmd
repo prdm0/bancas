@@ -157,17 +157,31 @@ Em que situação os resíduos propostos (resíduo ponderado padronizado) é mel
 
 ## Na avaliação das estatísticas PRESS
 
-PRESS - Soma dos Quadrados dos Erros de Previsão
+[PRESS - Soma dos Quadrados dos Erros de Previsão](https://sci-hub.se/https://www.tandfonline.com/doi/abs/10.1080/00401706.1974.10489157)
 
 Para avaliar a capacidade preditiva do modelo, é preciso que a sequência de variáveis aleatórias $(Y_i - \widehat{Y}_i)^2$ sejam i.i.d's, de modo que se você utiliza a mesma amostra para ajustar o modelo e obter $\widehat{Y}$ também para avaliar $d_1^2 = (Y_1 - \widehat{Y}_1)^2, d_2^2 = (Y_2 - \widehat{Y}_2)^2, \cdots, d_m^2 = (Y_m - \widehat{Y}_m)^2$, fazem com que essa sequência não sejam independentes. É preciso ter $m$ novas observações que não foram utilizadas para ajustar o modelo. Não tendo independência, não há garantias da lei dos grandes números para que
 
-$$PRESS \rightarrow \mathbb{E}[(Y - \widehat{Y})^2].$$
+$$PRESS \rightarrow \mathbb{E}[(Y - \widehat{Y})^2] = n \times EQM$$
 
 Em outras palavras, se foram utilizados as mesmas observações para calcular $\widehat{y}_i$, para todo $i$, então a sequência $(y_i - \widehat{y}_i)^2$ não são observações de uma sequência de variáveis aleatórias independentes, e a aproximação acima não é verdadeira. Essa separação de um conjunto de novas observações é feita em todo procedimento de validação cruzada, como no caso mais geral que é o *leave-one-out cross-validation*. 
+
+Muitas observações, a saber $n - 1$, são utilizadas para calcular $\widehat{y}_i$, para todo $i = 1, \cdots, n$. Portanto, existe dependência entre a sequência $d_1^2, \cdots, d_n^2$. O interessante seria considerar $m$ novas observações, e calcular $d_{n + 1}^2, \cdots, d_{m}^2$. É por isso, que muitos algoritmos de aprendizagem de máquina utilizam um conjunto de teste independente dos dados que são utilizados para ajustar os modelos.
 
 ## Página 47 $e_{(i)}$
 
 Não seria melhor trocar $e_{(i)} = y_i - \widehat{y}_{(-i)}$ por $r_{(i)}$? O $e_{(i)}$ me induz a pensar no erro que é o que desejamos estimar.
+
+## Ainda sobre a independência
+
+O artigo do [Mediavilla](http://www.na-businesspress.com/JABE/MendezWeb.pdf) não é um paper com muitos cuidados. Não é verdade que a sequência de observações são independentes.
+
+Na página 48 você diz:
+
+> Como a $i$-ésima observação é omitida para prever $y_i$, então $\widehat{y}_{(-i)}$ e $e_{(-i)}$ são independentes, o que garante que a estatística $PRESS$ seja uma medida indicativa da capacidade de
+previsão de um modelo de regressão, independentemente da qualidade do ajuste do modelo
+(MEDIAVILLA et al., 2008).
+
+Insisto que essa sequência não são de observações de variáveis aleatórias independentes. Clique [AQUI](https://pedro-rafael.shinyapps.io/shiny_apps/#section-avalia%C3%A7%C3%A3o-do-risco-preditivo) em que criei uma aplicação Web em que avalio o risco preditivo usando um precedimento de *leave-one-out cross-validation*, para uma regressão polinomial. Chamo de "certo" o risco quando avaliado em um conjunto de dados independente, em que nenhuma observação foi utilizada para calcular $\widehat{y}_i$ e chamo de "errado" o procedimento de realizar o *leave-one-out cross-validation* e depois não reavaliar o melhor modelo em um conjunto de dados independente. Note que, da forma errada, apenas selecionado o modelo usando*leave-one-out cross-validation* sem considerar um conjunto de teste me conduz a ideia de que aumentar o grau do polinômio, i.e., introduzir mais parâmetros sempre será uma boa altarnativa. Isso não é verdade, uma vez que um polinômio com grau muito elevado me leva à *overfitting*.
 
 ## AIC
 
