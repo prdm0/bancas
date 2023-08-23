@@ -85,7 +85,7 @@ Além disso, nas referências da distribuição $y\geq 0$.
 
 A ideia do estudo é a avaliação dos resíduos para a análise da especificação do modelo de regressão beta prime. Portanto, queremos estimar $r({\bf x}) = \mathbb{E}(Y|X)$, ou seja, desejamos uma função de regressão com boa capacidade preditiva. Uma das suposiões é que $Y\sim BP$. 
 
-Pergunta: em cenários em que $Y$ segue a distribuição aproximadamente BP, utilizar estatísticas de adequação de ajuste para comparar a regressão BP com outros modelos de regressão, a exemplo, dos MGL's, como, por exemplo, com o modelo MLG com $Y \sim Gama$, a análise de resíduos proposta não levam as mesmas conclusões de que chegaríamos em uma análise de resíduo? Por exemplo, utilizar estatísticas como a estatística de Cramér-von Mises e Anderson-Darling para modelos não encaixados não poderia ser útil para comparar a distribuição de $Y$ e decidir qual modelo melhor se ajusta aos dados? 
+Pergunta: em cenários em que $Y$ segue a distribuição aproximadamente BP, utilizar estatísticas de adequação de ajuste para comparar a regressão BP com outros modelos de regressão, a exemplo, dos MGL's, como, por exemplo, com o modelo MLG com $Y \sim Gama$, a análise de resíduos proposta não levam as mesmas conclusões de que chegaríamos em aplicar utilizar a teoria da informação para checar a qualidade do ajuste? Por exemplo, utilizar estatísticas como a estatística de Cramér-von Mises e Anderson-Darling para modelos não encaixados não poderia ser útil para comparar a distribuição de $Y$ e decidir qual modelo melhor se ajusta aos dados? 
 
 ## Especificação correta garante boa capacidade preditiva?
 
@@ -114,7 +114,7 @@ Dessa forma, sugiro você comentar um pouco mais qual a grande importância da b
 
 No material fica um pouco nebuloso de qual a grande ideia de se fazer uma análise de resíduos.
 
-## avaliamos a distribuição empírica dos resíduos
+## Avaliamos a distribuição empírica dos resíduos
 
 Vocês fazem uma análise de distribuição empírica do resíduo, para detecção da especificação incorreta do modelo de regressão BP. Existe um apelo frequentista, uma vez que necessita-se de uma aproximação assintótica da distribuição dos resíduos para a normal. Até que ponto, essa análise é melhor que utilizar a teoria da informação e estudar a distribuição de $Y$, sobretudo em situações em que temos poucos dados ou uma quantidade moderada de dados?
 
@@ -191,6 +191,15 @@ $$PRESS = \sum_{i = 1}^n (Y - \widehat{Y}_{(i)})^2.$$
 Só que Stones, um pouco depois, em 1977, mostro que **Leave-one-out cross-validation** converge assintoticamente para o método AIC. Vocês possuem a estrutura probabilística do modelo que permite o cálculo analítico do AIC. Portanto, avaliar o risco preditivo usando o AIC já seria suficiente, i.e, seria o melhor resultado assintótico do **leave-one-out**. Leia o artigo [An Asymptotic Equivalence of Choice of Models by Cross-validation and Akaike's Criterion](https://www.jstor.org/stable/2984877). Esse paper é citado em mais de 1500 trabalhos.
 
 Sugiro que seja comparado também com o AIC, uma vez que isso é facilmente feito.
+
+
+## Como se comporta a estatística $P_{\beta}^2$ e $P_{\beta_c}^2$
+
+Na página 49 você define as estatísticas $P_{\beta}^2$ e $P_{\beta_c}^2$. Como se comportam tais estatísticas na presença de mais covariáveis no modelo? São monótonas? Seria legal ter uma simulação de Monte-Carlo mostrando como se comportam tais estatísticas e se elas penalizam modelos com muitos parâmetros. Fazer um gráfico com a evolução das estatísticas em que no eixo $x$ você vai aumentando a quantidade de parâmetros seria uma forma boa de visualizar o comportamento. A ideia é que as estatísticas $P_{\beta}^2$ e $P_{\beta_c}^2$ decresçam e a partir de um momento começem a piorar na medida que aumenta-se a quantidade de covariáveis. 
+
+Veja essa aplicação que implementei  a estatística $P^2$ para um modelo de regressão polinomial. Note que ela sinaliza que colocar mais parâmetros sempre é uma boa opção!
+
+Clique [**AQUI**](https://pedro-rafael.shinyapps.io/shiny_apps/#section-maria-eduarda) para ver.
 
 ## Cadê os demais códigos?
 

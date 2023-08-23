@@ -170,7 +170,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="utilizar-a-teoria-da-informação" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="utilizar-a-teoria-da-informação"><span class="header-section-number">2.3</span> Utilizar a teoria da informação</h2>
 <p>A ideia do estudo é a avaliação dos resíduos para a análise da especificação do modelo de regressão beta prime. Portanto, queremos estimar <span class="math inline">\(r({\bf x}) = \mathbb{E}(Y|X)\)</span>, ou seja, desejamos uma função de regressão com boa capacidade preditiva. Uma das suposiões é que <span class="math inline">\(Y\sim BP\)</span>.</p>
-<p>Pergunta: em cenários em que <span class="math inline">\(Y\)</span> segue a distribuição aproximadamente BP, utilizar estatísticas de adequação de ajuste para comparar a regressão BP com outros modelos de regressão, a exemplo, dos MGL’s, como, por exemplo, com o modelo MLG com <span class="math inline">\(Y \sim Gama\)</span>, a análise de resíduos proposta não levam as mesmas conclusões de que chegaríamos em uma análise de resíduo? Por exemplo, utilizar estatísticas como a estatística de Cramér-von Mises e Anderson-Darling para modelos não encaixados não poderia ser útil para comparar a distribuição de <span class="math inline">\(Y\)</span> e decidir qual modelo melhor se ajusta aos dados?</p>
+<p>Pergunta: em cenários em que <span class="math inline">\(Y\)</span> segue a distribuição aproximadamente BP, utilizar estatísticas de adequação de ajuste para comparar a regressão BP com outros modelos de regressão, a exemplo, dos MGL’s, como, por exemplo, com o modelo MLG com <span class="math inline">\(Y \sim Gama\)</span>, a análise de resíduos proposta não levam as mesmas conclusões de que chegaríamos em aplicar utilizar a teoria da informação para checar a qualidade do ajuste? Por exemplo, utilizar estatísticas como a estatística de Cramér-von Mises e Anderson-Darling para modelos não encaixados não poderia ser útil para comparar a distribuição de <span class="math inline">\(Y\)</span> e decidir qual modelo melhor se ajusta aos dados?</p>
 </section>
 <section id="especificação-correta-garante-boa-capacidade-preditiva" class="level2" data-number="2.4">
 <h2 data-number="2.4" class="anchored" data-anchor-id="especificação-correta-garante-boa-capacidade-preditiva"><span class="header-section-number">2.4</span> Especificação correta garante boa capacidade preditiva?</h2>
@@ -193,7 +193,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>No material fica um pouco nebuloso de qual a grande ideia de se fazer uma análise de resíduos.</p>
 </section>
 <section id="avaliamos-a-distribuição-empírica-dos-resíduos" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="avaliamos-a-distribuição-empírica-dos-resíduos"><span class="header-section-number">2.5</span> avaliamos a distribuição empírica dos resíduos</h2>
+<h2 data-number="2.5" class="anchored" data-anchor-id="avaliamos-a-distribuição-empírica-dos-resíduos"><span class="header-section-number">2.5</span> Avaliamos a distribuição empírica dos resíduos</h2>
 <p>Vocês fazem uma análise de distribuição empírica do resíduo, para detecção da especificação incorreta do modelo de regressão BP. Existe um apelo frequentista, uma vez que necessita-se de uma aproximação assintótica da distribuição dos resíduos para a normal. Até que ponto, essa análise é melhor que utilizar a teoria da informação e estudar a distribuição de <span class="math inline">\(Y\)</span>, sobretudo em situações em que temos poucos dados ou uma quantidade moderada de dados?</p>
 </section>
 <section id="pensam-em-adicionar-penalização" class="level2" data-number="2.6">
@@ -251,8 +251,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><span class="math display">\[PRESS = \sum_{i = 1}^n (Y - \widehat{Y}_{(i)})^2.\]</span> Só que Stones, um pouco depois, em 1977, mostro que <strong>Leave-one-out cross-validation</strong> converge assintoticamente para o método AIC. Vocês possuem a estrutura probabilística do modelo que permite o cálculo analítico do AIC. Portanto, avaliar o risco preditivo usando o AIC já seria suficiente, i.e, seria o melhor resultado assintótico do <strong>leave-one-out</strong>. Leia o artigo <a href="https://www.jstor.org/stable/2984877">An Asymptotic Equivalence of Choice of Models by Cross-validation and Akaike’s Criterion</a>. Esse paper é citado em mais de 1500 trabalhos.</p>
 <p>Sugiro que seja comparado também com o AIC, uma vez que isso é facilmente feito.</p>
 </section>
-<section id="cadê-os-demais-códigos" class="level2" data-number="2.14">
-<h2 data-number="2.14" class="anchored" data-anchor-id="cadê-os-demais-códigos"><span class="header-section-number">2.14</span> Cadê os demais códigos?</h2>
+<section id="como-se-comporta-a-estatística-p_beta2-e-p_beta_c2" class="level2" data-number="2.14">
+<h2 data-number="2.14" class="anchored" data-anchor-id="como-se-comporta-a-estatística-p_beta2-e-p_beta_c2"><span class="header-section-number">2.14</span> Como se comporta a estatística <span class="math inline">\(P_{\beta}^2\)</span> e <span class="math inline">\(P_{\beta_c}^2\)</span></h2>
+<p>Na página 49 você define as estatísticas <span class="math inline">\(P_{\beta}^2\)</span> e <span class="math inline">\(P_{\beta_c}^2\)</span>. Como se comportam tais estatísticas na presença de mais covariáveis no modelo? São monótonas? Seria legal ter uma simulação de Monte-Carlo mostrando como se comportam tais estatísticas e se elas penalizam modelos com muitos parâmetros. Fazer um gráfico com a evolução das estatísticas em que no eixo <span class="math inline">\(x\)</span> você vai aumentando a quantidade de parâmetros seria uma forma boa de visualizar o comportamento. A ideia é que as estatísticas <span class="math inline">\(P_{\beta}^2\)</span> e <span class="math inline">\(P_{\beta_c}^2\)</span> decresçam e a partir de um momento começem a piorar na medida que aumenta-se a quantidade de covariáveis.</p>
+<p>Veja essa aplicação que implementei a estatística <span class="math inline">\(P^2\)</span> para um modelo de regressão polinomial. Note que ela sinaliza que colocar mais parâmetros sempre é uma boa opção!</p>
+<p>Clique <a href="https://pedro-rafael.shinyapps.io/shiny_apps/#section-maria-eduarda"><strong>AQUI</strong></a> para ver.</p>
+</section>
+<section id="cadê-os-demais-códigos" class="level2" data-number="2.15">
+<h2 data-number="2.15" class="anchored" data-anchor-id="cadê-os-demais-códigos"><span class="header-section-number">2.15</span> Cadê os demais códigos?</h2>
 <p>No código das simulações há diversas interções de códigos R com o a função <code>source()</code>. Onde estão esses arquivos. Sugiro criar uma conta no <a href="https://github.com/">GitHub</a> e criar um repositório com o script R e um pequeno comentário do que cada código faz.</p>
 <ul>
 <li>Onde está <code>gamlss_BP.R</code>?</li>
@@ -263,12 +269,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Por exemplo, no paper do Marcelo, ele coloca a referência para o repositório do GitHub em que contém o pacote <strong>BPmodel</strong> (<a href="https://github.com/santosneto/BPmodel">ver aqui</a>) que muito provavelmente você está usando em algum script.</p>
 <p>É preciso que seu experimento seja totalmente repoduzível. Quem ler quer chegar aos mesmos resultados!</p>
 </section>
-<section id="por-que-i---i---1" class="level2" data-number="2.15">
-<h2 data-number="2.15" class="anchored" data-anchor-id="por-que-i---i---1"><span class="header-section-number">2.15</span> Por que <code>i &lt;- i - 1</code></h2>
+<section id="por-que-i---i---1" class="level2" data-number="2.16">
+<h2 data-number="2.16" class="anchored" data-anchor-id="por-que-i---i---1"><span class="header-section-number">2.16</span> Por que <code>i &lt;- i - 1</code></h2>
 <p>No código, na página 88, dentro da instrução <code>else</code>, por que fazer <code>i &lt;- i - 1</code>? Não há problema teórico, pois na verdade se terá mais réplicas que as 10 mil. Então, na verdade foram realizadas mais de 10 mil répicas de Monte-Carlo.</p>
 </section>
-<section id="qual-o-método-de-otimiação-usado-em-gamlss" class="level2" data-number="2.16">
-<h2 data-number="2.16" class="anchored" data-anchor-id="qual-o-método-de-otimiação-usado-em-gamlss"><span class="header-section-number">2.16</span> Qual o método de otimiação usado em <code>gamlss</code>?</h2>
+<section id="qual-o-método-de-otimiação-usado-em-gamlss" class="level2" data-number="2.17">
+<h2 data-number="2.17" class="anchored" data-anchor-id="qual-o-método-de-otimiação-usado-em-gamlss"><span class="header-section-number">2.17</span> Qual o método de otimiação usado em <code>gamlss</code>?</h2>
 <p>Qual o método de otimização utilizado pela função <code>gamlss</code>? Seria interessante colocar nas tabelas a taxa de não convergência. Isso é útil, uma vez que não há forma fechada para os estimadores de máxima verossimilhança. Perceber como a otimização numérica performa na maximização da função de log-verossimilhança é uma informação útil.</p>
 <!-- -->
 
@@ -711,7 +717,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>A ideia do estudo é a avaliação dos resíduos para a análise da especificação do modelo de regressão beta prime. Portanto, queremos estimar $r({\bf x}) = \mathbb{E}(Y|X)$, ou seja, desejamos uma função de regressão com boa capacidade preditiva. Uma das suposiões é que $Y\sim BP$. </span>
 <span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>Pergunta: em cenários em que $Y$ segue a distribuição aproximadamente BP, utilizar estatísticas de adequação de ajuste para comparar a regressão BP com outros modelos de regressão, a exemplo, dos MGL's, como, por exemplo, com o modelo MLG com $Y \sim Gama$, a análise de resíduos proposta não levam as mesmas conclusões de que chegaríamos em uma análise de resíduo? Por exemplo, utilizar estatísticas como a estatística de Cramér-von Mises e Anderson-Darling para modelos não encaixados não poderia ser útil para comparar a distribuição de $Y$ e decidir qual modelo melhor se ajusta aos dados? </span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>Pergunta: em cenários em que $Y$ segue a distribuição aproximadamente BP, utilizar estatísticas de adequação de ajuste para comparar a regressão BP com outros modelos de regressão, a exemplo, dos MGL's, como, por exemplo, com o modelo MLG com $Y \sim Gama$, a análise de resíduos proposta não levam as mesmas conclusões de que chegaríamos em aplicar utilizar a teoria da informação para checar a qualidade do ajuste? Por exemplo, utilizar estatísticas como a estatística de Cramér-von Mises e Anderson-Darling para modelos não encaixados não poderia ser útil para comparar a distribuição de $Y$ e decidir qual modelo melhor se ajusta aos dados? </span>
 <span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a><span class="fu">## Especificação correta garante boa capacidade preditiva?</span></span>
 <span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a></span>
@@ -740,7 +746,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a>No material fica um pouco nebuloso de qual a grande ideia de se fazer uma análise de resíduos.</span>
 <span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a><span class="fu">## avaliamos a distribuição empírica dos resíduos</span></span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a><span class="fu">## Avaliamos a distribuição empírica dos resíduos</span></span>
 <span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a>Vocês fazem uma análise de distribuição empírica do resíduo, para detecção da especificação incorreta do modelo de regressão BP. Existe um apelo frequentista, uma vez que necessita-se de uma aproximação assintótica da distribuição dos resíduos para a normal. Até que ponto, essa análise é melhor que utilizar a teoria da informação e estudar a distribuição de $Y$, sobretudo em situações em que temos poucos dados ou uma quantidade moderada de dados?</span>
 <span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a></span>
@@ -818,26 +824,35 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-192"><a href="#cb1-192" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-193"><a href="#cb1-193" aria-hidden="true" tabindex="-1"></a>Sugiro que seja comparado também com o AIC, uma vez que isso é facilmente feito.</span>
 <span id="cb1-194"><a href="#cb1-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-195"><a href="#cb1-195" aria-hidden="true" tabindex="-1"></a><span class="fu">## Cadê os demais códigos?</span></span>
-<span id="cb1-196"><a href="#cb1-196" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-197"><a href="#cb1-197" aria-hidden="true" tabindex="-1"></a>No código das simulações há diversas interções de códigos R com o a função <span class="in">`source()`</span>. Onde estão esses arquivos. Sugiro criar uma conta no <span class="co">[</span><span class="ot">GitHub</span><span class="co">](https://github.com/)</span> e criar um repositório com o script R e um pequeno comentário do que cada código faz.</span>
-<span id="cb1-198"><a href="#cb1-198" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-199"><a href="#cb1-199" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>Onde está <span class="in">`gamlss_BP.R`</span>?</span>
-<span id="cb1-200"><a href="#cb1-200" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>Onde está <span class="in">`glmBP.R`</span>?</span>
-<span id="cb1-201"><a href="#cb1-201" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>Onde está <span class="in">`Estimation.R`</span>?</span>
-<span id="cb1-202"><a href="#cb1-202" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>Onde está <span class="in">`Residual_H_Log_Like_BP.R`</span>?</span>
-<span id="cb1-203"><a href="#cb1-203" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-204"><a href="#cb1-204" aria-hidden="true" tabindex="-1"></a>Por exemplo, no paper do Marcelo, ele coloca a referência para o repositório do GitHub em que contém o pacote **BPmodel** (<span class="co">[</span><span class="ot">ver aqui</span><span class="co">](https://github.com/santosneto/BPmodel)</span>) que muito provavelmente você está usando em algum script. </span>
-<span id="cb1-205"><a href="#cb1-205" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-206"><a href="#cb1-206" aria-hidden="true" tabindex="-1"></a>É preciso que seu experimento seja totalmente repoduzível. Quem ler quer chegar aos mesmos resultados!</span>
+<span id="cb1-195"><a href="#cb1-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-196"><a href="#cb1-196" aria-hidden="true" tabindex="-1"></a><span class="fu">## Como se comporta a estatística $P_{\beta}^2$ e $P_{\beta_c}^2$</span></span>
+<span id="cb1-197"><a href="#cb1-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-198"><a href="#cb1-198" aria-hidden="true" tabindex="-1"></a>Na página 49 você define as estatísticas $P_{\beta}^2$ e $P_{\beta_c}^2$. Como se comportam tais estatísticas na presença de mais covariáveis no modelo? São monótonas? Seria legal ter uma simulação de Monte-Carlo mostrando como se comportam tais estatísticas e se elas penalizam modelos com muitos parâmetros. Fazer um gráfico com a evolução das estatísticas em que no eixo $x$ você vai aumentando a quantidade de parâmetros seria uma forma boa de visualizar o comportamento. A ideia é que as estatísticas $P_{\beta}^2$ e $P_{\beta_c}^2$ decresçam e a partir de um momento começem a piorar na medida que aumenta-se a quantidade de covariáveis. </span>
+<span id="cb1-199"><a href="#cb1-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-200"><a href="#cb1-200" aria-hidden="true" tabindex="-1"></a>Veja essa aplicação que implementei  a estatística $P^2$ para um modelo de regressão polinomial. Note que ela sinaliza que colocar mais parâmetros sempre é uma boa opção!</span>
+<span id="cb1-201"><a href="#cb1-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-202"><a href="#cb1-202" aria-hidden="true" tabindex="-1"></a>Clique <span class="co">[</span><span class="ot">**AQUI**</span><span class="co">](https://pedro-rafael.shinyapps.io/shiny_apps/#section-maria-eduarda)</span> para ver.</span>
+<span id="cb1-203"><a href="#cb1-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-204"><a href="#cb1-204" aria-hidden="true" tabindex="-1"></a><span class="fu">## Cadê os demais códigos?</span></span>
+<span id="cb1-205"><a href="#cb1-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-206"><a href="#cb1-206" aria-hidden="true" tabindex="-1"></a>No código das simulações há diversas interções de códigos R com o a função <span class="in">`source()`</span>. Onde estão esses arquivos. Sugiro criar uma conta no <span class="co">[</span><span class="ot">GitHub</span><span class="co">](https://github.com/)</span> e criar um repositório com o script R e um pequeno comentário do que cada código faz.</span>
 <span id="cb1-207"><a href="#cb1-207" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-208"><a href="#cb1-208" aria-hidden="true" tabindex="-1"></a><span class="fu">## Por que `i &lt;- i - 1`</span></span>
-<span id="cb1-209"><a href="#cb1-209" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-210"><a href="#cb1-210" aria-hidden="true" tabindex="-1"></a>No código, na página 88, dentro da instrução <span class="in">`else`</span>, por que fazer <span class="in">`i &lt;- i - 1`</span>? Não há problema teórico, pois na verdade se terá mais réplicas que as 10 mil. Então, na verdade foram realizadas mais de 10 mil répicas de Monte-Carlo.</span>
-<span id="cb1-211"><a href="#cb1-211" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-212"><a href="#cb1-212" aria-hidden="true" tabindex="-1"></a><span class="fu">## Qual o método de otimiação usado em `gamlss`?</span></span>
-<span id="cb1-213"><a href="#cb1-213" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-214"><a href="#cb1-214" aria-hidden="true" tabindex="-1"></a>Qual o método de otimização utilizado pela função <span class="in">`gamlss`</span>? Seria interessante colocar nas tabelas a taxa de não convergência. Isso é útil, uma vez que não há forma fechada para os estimadores de máxima verossimilhança. Perceber como a otimização numérica performa na maximização da função de log-verossimilhança é uma informação útil.</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-208"><a href="#cb1-208" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>Onde está <span class="in">`gamlss_BP.R`</span>?</span>
+<span id="cb1-209"><a href="#cb1-209" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>Onde está <span class="in">`glmBP.R`</span>?</span>
+<span id="cb1-210"><a href="#cb1-210" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>Onde está <span class="in">`Estimation.R`</span>?</span>
+<span id="cb1-211"><a href="#cb1-211" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>Onde está <span class="in">`Residual_H_Log_Like_BP.R`</span>?</span>
+<span id="cb1-212"><a href="#cb1-212" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-213"><a href="#cb1-213" aria-hidden="true" tabindex="-1"></a>Por exemplo, no paper do Marcelo, ele coloca a referência para o repositório do GitHub em que contém o pacote **BPmodel** (<span class="co">[</span><span class="ot">ver aqui</span><span class="co">](https://github.com/santosneto/BPmodel)</span>) que muito provavelmente você está usando em algum script. </span>
+<span id="cb1-214"><a href="#cb1-214" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-215"><a href="#cb1-215" aria-hidden="true" tabindex="-1"></a>É preciso que seu experimento seja totalmente repoduzível. Quem ler quer chegar aos mesmos resultados!</span>
+<span id="cb1-216"><a href="#cb1-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-217"><a href="#cb1-217" aria-hidden="true" tabindex="-1"></a><span class="fu">## Por que `i &lt;- i - 1`</span></span>
+<span id="cb1-218"><a href="#cb1-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-219"><a href="#cb1-219" aria-hidden="true" tabindex="-1"></a>No código, na página 88, dentro da instrução <span class="in">`else`</span>, por que fazer <span class="in">`i &lt;- i - 1`</span>? Não há problema teórico, pois na verdade se terá mais réplicas que as 10 mil. Então, na verdade foram realizadas mais de 10 mil répicas de Monte-Carlo.</span>
+<span id="cb1-220"><a href="#cb1-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-221"><a href="#cb1-221" aria-hidden="true" tabindex="-1"></a><span class="fu">## Qual o método de otimiação usado em `gamlss`?</span></span>
+<span id="cb1-222"><a href="#cb1-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-223"><a href="#cb1-223" aria-hidden="true" tabindex="-1"></a>Qual o método de otimização utilizado pela função <span class="in">`gamlss`</span>? Seria interessante colocar nas tabelas a taxa de não convergência. Isso é útil, uma vez que não há forma fechada para os estimadores de máxima verossimilhança. Perceber como a otimização numérica performa na maximização da função de log-verossimilhança é uma informação útil.</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
