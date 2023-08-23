@@ -48,7 +48,7 @@ com $\alpha > 0$ e  $\beta > 0$.
 
 # Seguestões e comentários
 
-## O que é definir os resíduos ponderado e Pearson padronizado?
+## Definiram um novo ou avaliaram os que já foram propostos?
 
 No resumo você diz: 
 
@@ -57,7 +57,7 @@ resíduo de Pearson utilizados por Bourguignon et al. (2021), **definimos** os r
 ponderado padronizado (ESPINHEIRA et al., 2008) e Pearson padronizado (MCCULLAGH;
 NELDER, 1989) para tal modelo." -- Maria Eduarda
 
-O que é definir os resíudos? Não seria melhor trocar definir por "avaliamos"? Eles não já foram definidos pelos autores de uma forma genérica? Definir tem conotação de que vocês criaram.
+O que é definir os resíduos? Não seria melhor trocar definir por "avaliamos"? Eles não já foram definidos pelos autores de uma forma genérica? Definir tem conotação de que vocês criaram.
 
 ## Suporte da distribuição BP
 
