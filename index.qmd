@@ -193,13 +193,15 @@ Só que Stones, um pouco depois, em 1977, mostro que **Leave-one-out cross-valid
 Sugiro que seja comparado também com o AIC, uma vez que isso é facilmente feito.
 
 
-## Como se comporta a estatística $P_{\beta}^2$ e $P_{\beta_c}^2$
+## Como se comportam as estatísticas $P_{\beta}^2$ e $P_{\beta_c}^2$
 
 Na página 49 você define as estatísticas $P_{\beta}^2$ e $P_{\beta_c}^2$. Como se comportam tais estatísticas na presença de mais covariáveis no modelo? São monótonas? Seria legal ter uma simulação de Monte-Carlo mostrando como se comportam tais estatísticas e se elas penalizam modelos com muitos parâmetros. Fazer um gráfico com a evolução das estatísticas em que no eixo $x$ você vai aumentando a quantidade de parâmetros seria uma forma boa de visualizar o comportamento. A ideia é que as estatísticas $P_{\beta}^2$ e $P_{\beta_c}^2$ decresçam e a partir de um momento começem a piorar na medida que aumenta-se a quantidade de covariáveis. 
 
 Veja essa aplicação que implementei  a estatística $P^2$ para um modelo de regressão polinomial. Note que ela sinaliza que colocar mais parâmetros sempre é uma boa opção!
 
 Clique [**AQUI**](https://pedro-rafael.shinyapps.io/shiny_apps/#section-maria-eduarda) para ver.
+
+A estatística $P_{\beta_c}^2$ sofre com isso? Seria legal fazer um gráfico mostrando qual o comportamento dela quando se adiciona mais covariáveis no modelo.
 
 ## Cadê os demais códigos?
 
