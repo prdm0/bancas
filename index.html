@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.176">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Prof.&nbsp;Dr.&nbsp;Pedro Rafael D. Marinho">
+
+<title>Sugestões de melhorias e comentários</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="index_files/libs/clipboard/clipboard.min.js"></script>
+<script src="index_files/libs/quarto-html/quarto.js"></script>
+<script src="index_files/libs/quarto-html/popper.min.js"></script>
+<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="index_files/libs/quarto-html/anchor.min.js"></script>
+<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="index_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-full">
+
+<main class="content column-page" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Sugestões de melhorias e comentários</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Código</button></div></div>
+<p class="subtitle lead">MEDIDAS DE DIAGNÓSTICO EM MODELOS DE REGRESSÃO BETA PRIME</p>
+</div>
+
+
+
+<div class="quarto-title-meta column-page">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor</div>
+    <div class="quarto-title-meta-contents">
+             <p>Prof.&nbsp;Dr.&nbsp;Pedro Rafael D. Marinho </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Data de Publicação</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Invalid Date</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="objetivos-principais-e-observações" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Objetivos principais e observações:</h1>
+<p>Os objetivos principais do trabalho são:</p>
+<ol type="1">
+<li><p>Estudo dos resíduos do modelo de regressão beta prime, para além do que Bourguignon et al.&nbsp;(2021) considerou.</p></li>
+<li><p>Bourguignon et al.&nbsp;(2021) considerou os resíduo quantílico e do de Pearson;</p></li>
+<li><p>Aqui foram considerados os resíduo:</p></li>
+</ol>
+<ul>
+<li>resíduos ponderado;</li>
+<li><strong>ponderado padronizado</strong>. Esse foi o resíduo proposto;</li>
+<li>Pearson padronizado;</li>
+<li>Foi proposto coeficiente de predição <span class="math inline">\(P^2\)</span>.</li>
+</ul>
+<ol start="4" type="1">
+<li><p>Avalia-se a distribuição empírica dos resíduos em diferentes cenários do modelo de regressão BP e comparamos seus desempenhos para detectar especificação incorreta.</p></li>
+<li><p>A distribuição beta prime pode ser escrita na família exponencial de distribuições. Portanto, “compete” com os modelos lineares generalizados.</p></li>
+<li><p>Densidade da Beta Prime</p></li>
+</ol>
+<p><span class="math display">\[f(y;\alpha, \beta) = \frac{y^{\alpha - 1}(1 + y)^{-(\alpha + \beta)}}{B(\alpha, \beta)}, y \geq 0,\]</span> com <span class="math inline">\(\alpha &gt; 0\)</span> e <span class="math inline">\(\beta &gt; 0\)</span>.</p>
+<ol start="8" type="1">
+<li>Notações:</li>
+</ol>
+<ul>
+<li><span class="math inline">\(r_i^Q\)</span>: resíduo quantílico;</li>
+<li><span class="math inline">\(r_i^P\)</span>: resíduo de Pearson;</li>
+<li><span class="math inline">\(r^{\beta}\)</span>: resíduo poderado;</li>
+<li><span class="math inline">\(r^{\beta*}\)</span>: resíduo ponderado padronizado;</li>
+<li><span class="math inline">\(r^{P *}\)</span>: resíduo de Pearson padronizado.</li>
+</ul>
+</section>
+<section id="seguestões-e-comentários" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Seguestões e comentários</h1>
+<section id="o-que-é-definir-os-resíduos-ponderado-e-pearson-padronizado" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="o-que-é-definir-os-resíduos-ponderado-e-pearson-padronizado"><span class="header-section-number">2.1</span> O que é definir os resíduos ponderado e Pearson padronizado?</h2>
+<p>No resumo você diz:</p>
+<blockquote class="blockquote">
+<p>“além do resíduo quantílico e do resíduo de Pearson utilizados por Bourguignon et al.&nbsp;(2021), <strong>definimos</strong> os resíduos ponderado, ponderado padronizado (ESPINHEIRA et al., 2008) e Pearson padronizado (MCCULLAGH; NELDER, 1989) para tal modelo.” – Maria Eduarda</p>
+</blockquote>
+<p>O que é definir os resíudos? Não seria melhor trocar definir por “avaliamos”? Eles não já foram definidos pelos autores de uma forma genérica? Definir tem conotação de que vocês criaram.</p>
+</section>
+<section id="suporte-da-distribuição-bp" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="suporte-da-distribuição-bp"><span class="header-section-number">2.2</span> Suporte da distribuição BP</h2>
+<p>O suporte da distribuição da beta prime não inclue o zero (<span class="math inline">\(y \geq 0\)</span>)? Sei que Bourguignon et al.&nbsp;(2021) definiu como <span class="math inline">\(y &gt; 0\)</span>, mas não seria <span class="math inline">\(y \geq 0\)</span>? Note que na página 34 do paper (página 2 do PDF), último parágrafo, ele diz:</p>
+<blockquote class="blockquote">
+<p>Pode-se provar que a função densidade BP está diminuindo com <span class="math inline">\(f(y|\alpha,\beta)\)</span>, se <span class="math inline">\(0 &lt; \alpha &lt; 1\)</span> com moda em <span class="math inline">\(y = 0\)</span>. - Bourguignon et al.&nbsp;(2021)</p>
+</blockquote>
+<p>Além disso, nas referências da distribuição <span class="math inline">\(y\geq 0\)</span>.</p>
+<p><strong>Uma observação</strong>: Ela também é conhecida como distribuição de Pearson tipo VI. 🎁</p>
+<!-- ## Estudar se a distribuição normal é uma boa aproximação? -->
+<!-- No trabalho vocês estudam se a distribuição normal-padrão é uma boa aproximação para os resíduos.  -->
+<!-- > "Em particular, objetivamos verificar se a distribuição normal -->
+<!-- padrão é uma boa aproximação para a distribuição empírica desses cinco resíduos, quando o -->
+<!-- modelo de regressão BP é corretamente especificado, e analisar seus desempenhos para detectar -->
+<!-- erros de especificação." -- Maria Eduarda -->
+<!-- Isso já não seria esperado pelo Teorema Central do Limite - TCL? Se eu tenho uma sequência de variáveis aleatórias i.i.d's, não é esperado se tenho dados suficientes, terei uma boa aproximação? Por que simular isso se eu tenho garantias teóricas da boa aproximação? -->
+</section>
+<section id="utilizar-a-teoria-da-informação" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="utilizar-a-teoria-da-informação"><span class="header-section-number">2.3</span> Utilizar a teoria da informação</h2>
+<p>A ideia do estudo é a avaliação dos resíduos para a análise da especificação do modelo de regressão beta prime. Portanto, queremos estimar <span class="math inline">\(r({\bf x}) = \mathbb{E}(Y|X)\)</span>, ou seja, desejamos uma função de regressão com boa capacidade preditiva. Uma das suposiões é que <span class="math inline">\(Y\sim BP\)</span>.</p>
+<p>Pergunta: em cenários em que <span class="math inline">\(Y\)</span> segue a distribuição aproximadamente BP, utilizar estatísticas de adequação de ajuste para comparar a regressão BP com outros modelos de regressão, a exemplo, dos MGL’s, como, por exemplo, com o modelo MLG com <span class="math inline">\(Y \sim Gama\)</span>, a análise de resíduos proposta não levam as mesmas conclusões de que chegaríamos em aplicar utilizar a teoria da informação para checar a qualidade do ajuste? Por exemplo, utilizar estatísticas como a estatística de Cramér-von Mises e Anderson-Darling para modelos não encaixados não poderia ser útil para comparar a distribuição de <span class="math inline">\(Y\)</span> e decidir qual modelo melhor se ajusta aos dados?</p>
+</section>
+<section id="especificação-correta-garante-boa-capacidade-preditiva" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="especificação-correta-garante-boa-capacidade-preditiva"><span class="header-section-number">2.4</span> Especificação correta garante boa capacidade preditiva?</h2>
+<p>A especificação adequada do modelo garante boa capacidade preditiva? No resumo você diz:</p>
+<blockquote class="blockquote">
+<p>“Para isso, é importante utilizar resíduos com propriedades conhecidas e que apresentem bom desempenho.” - Maria Eduarda</p>
+</blockquote>
+<p>Segundo a lógica de aprendizagem de máquina não! Ver o paper do Leio Breiman:</p>
+<blockquote class="blockquote">
+<p><a href="https://projecteuclid.org/journalArticle/Download?urlId=10.1214%2Fss%2F1009213726">Breiman, L. (2001a). Statistical modeling: The two cultures. Statistical Science, 16(3), 199–231</a></p>
+</blockquote>
+<p>Nesse artigo ele estabelece duas culturas na modelagem estatística:</p>
+<ol type="1">
+<li><p><strong>Data modeling culture</strong>: nela, em geral, se assume que o modelo de regressão utilizado <span class="math inline">\(r({\bf x}) = \mathbb{E}(Y|{\bf X})\)</span> é correto. O principal objetivo dessa abordagem é a interpretação dos parâmetros que indexam o modelo <span class="math inline">\(r({\bf x})\)</span>.</p></li>
+<li><p><strong>Algorithmic modeling culture</strong>: essa é a cultura que domina a comunidade de aprendizagem de máquina. Nessa abordagem, o principal objetivo são as predições por meio de novas observações. Não se assume que o modelo utilizado é o modelo correto. Nesse tipo de modelagem, muitas vezes os algoritmos não envolve nenhuma estrutura probabilística. Muitas vezes, modelos não bem especificado conduzem a boas predições.</p></li>
+</ol>
+<p>Existe uma sequência de respostas à esse paper, por exemplo, estatísticos renomados como o David Cox e o Bradley Efron respondem positivamente à esse paper. O artigo possui mais de 5300 citações.</p>
+<p>Podemos ter modelos que não estão bem especificados, mas possuem boa performance preditiva. Por exemplo, tente ajustar um <a href="https://hastie.su.domains/ISLR2/ISLRv2_corrected_June_2023.pdf">random forest</a> em um problema, mesmo <span class="math inline">\(Y \in B(\alpha,\beta)\)</span>, em um grande conjunto de dados, e usando um conjunto de teste, calcule o erro quadrático médio observado na amostra independente. Muito provavelmente o <em>random forest</em> terá uma capacidade preditiva igual ou superior ao modelo de regressão BP.</p>
+<p>Dessa forma, sugiro você comentar um pouco mais qual a grande importância da boa especificação do modelo. Essa boa especificação não está única e exclusivamente na capacidade preditiva do modelo, pois muitas vezes poderemos nos surpreender com modelos não muito bem especificado e que performa muito melhor. A grande contribuição de termos um modelo que esteja bem especificado é permitir que análises interpretativas possam ser realizadas. É preciso destacar isso, uma vez que muitas pessoas que estão lendo materiais da estatística são pessoas da ciência de dados/computação, em que muitas dalas “pregam” que o interesse está na previsão e ofuscam a importância de ter modelos bem especificados quando desejamos perceber a relação entre as variáveis, construir intervalos para os parâmetros e testar hipóteses.</p>
+<p>No material fica um pouco nebuloso de qual a grande ideia de se fazer uma análise de resíduos.</p>
+</section>
+<section id="avaliamos-a-distribuição-empírica-dos-resíduos" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="avaliamos-a-distribuição-empírica-dos-resíduos"><span class="header-section-number">2.5</span> Avaliamos a distribuição empírica dos resíduos</h2>
+<p>Vocês fazem uma análise de distribuição empírica do resíduo, para detecção da especificação incorreta do modelo de regressão BP. Existe um apelo frequentista, uma vez que necessita-se de uma aproximação assintótica da distribuição dos resíduos para a normal. Até que ponto, essa análise é melhor que utilizar a teoria da informação e estudar a distribuição de <span class="math inline">\(Y\)</span>, sobretudo em situações em que temos poucos dados ou uma quantidade moderada de dados?</p>
+</section>
+<section id="pensam-em-adicionar-penalização" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="pensam-em-adicionar-penalização"><span class="header-section-number">2.6</span> Pensam em adicionar penalização?</h2>
+<p>Sei que vocês focaram em desenvolver inferência para auxiliar a análise de especificação do modelo de regressão BP. Porém, vocês pensaram dar passos para avançar o modelo de regressão BP, por exemplo, pensam em adicionar algum tipo de penalização no modelo de regressão beta prime? Existe um <em>trade off</em> entre viés e variância, em que uma penalização poderia fazer com que o modelo viesse performar melhor. Um estudo avaliando a peformance do modelo com e sem penalização, em diversos cenários poderia ser interessante.</p>
+</section>
+<section id="a-variância-do-modelo-de-regressão-bp-é-maior-como-assim" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="a-variância-do-modelo-de-regressão-bp-é-maior-como-assim"><span class="header-section-number">2.7</span> A variância do modelo de regressão BP é maior? Como assim?</h2>
+<p>Você diz:</p>
+<blockquote class="blockquote">
+<p>“Uma das vantagens refere-se à modelagem de dados mais dispersos, uma vez que a variância do modelo de regressão BP é maior que a variância do modelo gama.” - Maria Eduarda, página 12</p>
+</blockquote>
+<p>Você refere-se à variância do modelo ou a capacidade do modelo em modelar <span class="math inline">\(Y\)</span> com maior variância? O risco preditivo do modelo não sofre com modelos com maior variância? Veja que o risco preditivo <span class="math inline">\(R(\widehat{g})\)</span>, usando a norma <span class="math inline">\(L_2\)</span> no risco preditivo de um modelo de regressão, temos que o risco poderá ser decomposto como:</p>
+<p><span class="math display">\[R(\widehat{g}) = \mathbb{E}\left[(Y - \widehat{g}({\bf X}))^2| {\bf X} = {\bf x}\right] = \underbrace{\mathbb{V}[Y | {\bf X = x}]}_{\mathrm{i - Variância\,\, intrínseca}} + \overbrace{(r({\bf x}) - \mathbb{E}[\widehat{g}({\bf x})])^2}^{\mathrm{ii - Viés\, ao\, quadrado\, do\, modelo}} + \underbrace{\mathbb{V}[\widehat{g}({\bf x})]}_{\mathrm{iii - Variância\, do\, modelo}},\]</span></p>
+<p>em que <span class="math inline">\(\widehat{g}(\cdot)\)</span> é sua função de regressão estimada. Quando você diz que a variância do modelo de regressão BP é maior, você não está dizendo que iii é maior? Isso não me daria um maior risco preditivo? Escreva melhor o que você está querendo dizer com variância maior!</p>
+<p>Muito provavelmente existem diversas sequências de observações de <span class="math inline">\(Y\)</span> em que poderiam ser bem modeladas pela distribuição Gama e também pela distribuição BP. Se o modelo de regressão BP tem variância maior, poderia entender que modelar por um MLG eu teria um modelo que performa melhor? Como foi verificado que a variância do modelo é maior! Isso é realmente algo bom?</p>
+<p>Você não estaria querendo dizer que o modelo de regressão BP modela dados mais dispersos? Isso pode ser diferente de um modelo com variância maior.</p>
+</section>
+<section id="o-que-é-precisão-dos-dados" class="level2" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="o-que-é-precisão-dos-dados"><span class="header-section-number">2.8</span> O que é precisão dos dados?</h2>
+<blockquote class="blockquote">
+<p>Por outro lado, o resíduo ponderado padronizado aqui proposto deverá ser utilizado com cautela, dado que os experimentos de Monte Carlo revelaram que a proximidade da sua distribuição empírica pela distribuição normal padrão depende da precisão dos dados ajustados pelo modelo de regressão BP. - Maria Eduarda, página 41, primeira linha.</p>
+</blockquote>
+<p><strong>Precisão dos dados? Essa expressão é estranha!</strong></p>
+<p>O que tem que ser preciso são os modelos. Acho que você se refere à convergência assintótica das estimativas dos erros, nesse caso, do estimador do resíduo ponderado padronizado, denotado no trabalho por <span class="math inline">\(r_i^{\beta^*}\)</span> para a distribuição normal. Daí, quando <span class="math inline">\(n \rightarrow +\infty\)</span> temos que pela Teorema Central do Limite, <span class="math inline">\(r_i^{\beta^*}\)</span> deve convergir em distribuição para a distribuição normal. <strong>Precisão de dados</strong> tem outra conotação!</p>
+</section>
+<section id="em-qual-situação-r_ibeta-é-melhor-que-r_iq" class="level2" data-number="2.9">
+<h2 data-number="2.9" class="anchored" data-anchor-id="em-qual-situação-r_ibeta-é-melhor-que-r_iq"><span class="header-section-number">2.9</span> Em qual situação <span class="math inline">\(r_i^{\beta *}\)</span> é melhor que <span class="math inline">\(r_i^{Q}\)</span></h2>
+<p>Em que situação os resíduos propostos (resíduo ponderado padronizado) é melhor que utilizar o <span class="math inline">\(r_i^{Q}\)</span>? Ao fim, existe alguma situação que eu devo utilizar <span class="math inline">\(r_i^{\beta *}\)</span>?</p>
+</section>
+<section id="na-avaliação-das-estatísticas-press" class="level2" data-number="2.10">
+<h2 data-number="2.10" class="anchored" data-anchor-id="na-avaliação-das-estatísticas-press"><span class="header-section-number">2.10</span> Na avaliação das estatísticas PRESS</h2>
+<p><a href="https://sci-hub.se/https://www.tandfonline.com/doi/abs/10.1080/00401706.1974.10489157">PRESS - Soma dos Quadrados dos Erros de Previsão</a></p>
+<p>Para avaliar a capacidade preditiva do modelo, é preciso que a sequência de variáveis aleatórias <span class="math inline">\((Y_i - \widehat{Y}_i)^2\)</span> sejam i.i.d’s, de modo que se você utiliza a mesma amostra para ajustar o modelo e obter <span class="math inline">\(\widehat{Y}\)</span> também para avaliar <span class="math inline">\(d_1^2 = (Y_1 - \widehat{Y}_1)^2, d_2^2 = (Y_2 - \widehat{Y}_2)^2, \cdots, d_m^2 = (Y_m - \widehat{Y}_m)^2\)</span>, fazem com que essa sequência não sejam independentes. É preciso ter <span class="math inline">\(m\)</span> novas observações que não foram utilizadas para ajustar o modelo. Não tendo independência, não há garantias da lei dos grandes números para que</p>
+<p><span class="math display">\[PRESS \rightarrow \mathbb{E}[(Y - \widehat{Y})^2] = n \times EQM\]</span></p>
+<p>Em outras palavras, se foram utilizados as mesmas observações para calcular <span class="math inline">\(\widehat{y}_i\)</span>, para todo <span class="math inline">\(i\)</span>, então a sequência <span class="math inline">\((y_i - \widehat{y}_i)^2\)</span> não são observações de uma sequência de variáveis aleatórias independentes, e a aproximação acima não é verdadeira. Essa separação de um conjunto de novas observações é feita em todo procedimento de validação cruzada, como no caso mais geral que é o <em>leave-one-out cross-validation</em>.</p>
+<p>Muitas observações, a saber <span class="math inline">\(n - 1\)</span>, são utilizadas para calcular <span class="math inline">\(\widehat{y}_i\)</span>, para todo <span class="math inline">\(i = 1, \cdots, n\)</span>. Portanto, existe dependência entre a sequência <span class="math inline">\(d_1^2, \cdots, d_n^2\)</span>. O interessante seria considerar <span class="math inline">\(m\)</span> novas observações, e calcular <span class="math inline">\(d_{n + 1}^2, \cdots, d_{m}^2\)</span>. É por isso, que muitos algoritmos de aprendizagem de máquina utilizam um conjunto de teste independente dos dados que são utilizados para ajustar os modelos.</p>
+</section>
+<section id="página-47-e_i" class="level2" data-number="2.11">
+<h2 data-number="2.11" class="anchored" data-anchor-id="página-47-e_i"><span class="header-section-number">2.11</span> Página 47 <span class="math inline">\(e_{(i)}\)</span></h2>
+<p>Não seria melhor trocar <span class="math inline">\(e_{(i)} = y_i - \widehat{y}_{(-i)}\)</span> por <span class="math inline">\(r_{(i)}\)</span>? O <span class="math inline">\(e_{(i)}\)</span> me induz a pensar no erro que é o que desejamos estimar.</p>
+</section>
+<section id="ainda-sobre-a-independência" class="level2" data-number="2.12">
+<h2 data-number="2.12" class="anchored" data-anchor-id="ainda-sobre-a-independência"><span class="header-section-number">2.12</span> Ainda sobre a independência</h2>
+<p>O artigo do <a href="http://www.na-businesspress.com/JABE/MendezWeb.pdf">Mediavilla</a> não é um paper com muitos cuidados. Não é verdade que a sequência de observações são independentes.</p>
+<p>Na página 48 você diz:</p>
+<blockquote class="blockquote">
+<p>Como a <span class="math inline">\(i\)</span>-ésima observação é omitida para prever <span class="math inline">\(y_i\)</span>, então <span class="math inline">\(\widehat{y}_{(-i)}\)</span> e <span class="math inline">\(e_{(-i)}\)</span> são independentes, o que garante que a estatística <span class="math inline">\(PRESS\)</span> seja uma medida indicativa da capacidade de previsão de um modelo de regressão, independentemente da qualidade do ajuste do modelo (MEDIAVILLA et al., 2008).</p>
+</blockquote>
+<p>Insisto que essa sequência não são de observações de variáveis aleatórias independentes. Clique <a href="https://pedro-rafael.shinyapps.io/shiny_apps/#section-avalia%C3%A7%C3%A3o-do-risco-preditivo">AQUI</a> em que criei uma aplicação Web em que avalio o risco preditivo usando um precedimento de <em>leave-one-out cross-validation</em>, para uma regressão polinomial. Chamo de “certo” o risco quando avaliado em um conjunto de dados independente, em que nenhuma observação foi utilizada para calcular <span class="math inline">\(\widehat{y}_i\)</span> e chamo de “errado” o procedimento de realizar o <em>leave-one-out cross-validation</em> e depois não reavaliar o melhor modelo em um conjunto de dados independente. Note que, da forma errada, apenas selecionado o modelo usando<em>leave-one-out cross-validation</em> sem considerar um conjunto de teste me conduz a ideia de que aumentar o grau do polinômio, i.e., introduzir mais parâmetros sempre será uma boa altarnativa. Isso não é verdade, uma vez que um polinômio com grau muito elevado me leva à <em>overfitting</em>.</p>
+</section>
+<section id="aic" class="level2" data-number="2.13">
+<h2 data-number="2.13" class="anchored" data-anchor-id="aic"><span class="header-section-number">2.13</span> AIC</h2>
+<p>Por que vocês não compararam a performance da adequação de ajuste do modelo usando o AIC? O procedimento de <strong>Leave-one-out cross-validation</strong> ao qual se baseia a estatística <span class="math inline">\(PRESS\)</span> (ver Allen 1974), em que</p>
+<p><span class="math display">\[PRESS = \sum_{i = 1}^n (Y - \widehat{Y}_{(i)})^2.\]</span> Só que Stones, um pouco depois, em 1977, mostro que <strong>Leave-one-out cross-validation</strong> converge assintoticamente para o método AIC. Vocês possuem a estrutura probabilística do modelo que permite o cálculo analítico do AIC. Portanto, avaliar o risco preditivo usando o AIC já seria suficiente, i.e, seria o melhor resultado assintótico do <strong>leave-one-out</strong>. Leia o artigo <a href="https://www.jstor.org/stable/2984877">An Asymptotic Equivalence of Choice of Models by Cross-validation and Akaike’s Criterion</a>. Esse paper é citado em mais de 1500 trabalhos.</p>
+<p>Sugiro que seja comparado também com o AIC, uma vez que isso é facilmente feito.</p>
+</section>
+<section id="como-se-comporta-a-estatística-p_beta2-e-p_beta_c2" class="level2" data-number="2.14">
+<h2 data-number="2.14" class="anchored" data-anchor-id="como-se-comporta-a-estatística-p_beta2-e-p_beta_c2"><span class="header-section-number">2.14</span> Como se comporta a estatística <span class="math inline">\(P_{\beta}^2\)</span> e <span class="math inline">\(P_{\beta_c}^2\)</span></h2>
+<p>Na página 49 você define as estatísticas <span class="math inline">\(P_{\beta}^2\)</span> e <span class="math inline">\(P_{\beta_c}^2\)</span>. Como se comportam tais estatísticas na presença de mais covariáveis no modelo? São monótonas? Seria legal ter uma simulação de Monte-Carlo mostrando como se comportam tais estatísticas e se elas penalizam modelos com muitos parâmetros. Fazer um gráfico com a evolução das estatísticas em que no eixo <span class="math inline">\(x\)</span> você vai aumentando a quantidade de parâmetros seria uma forma boa de visualizar o comportamento. A ideia é que as estatísticas <span class="math inline">\(P_{\beta}^2\)</span> e <span class="math inline">\(P_{\beta_c}^2\)</span> decresçam e a partir de um momento começem a piorar na medida que aumenta-se a quantidade de covariáveis.</p>
+<p>Veja essa aplicação que implementei a estatística <span class="math inline">\(P^2\)</span> para um modelo de regressão polinomial. Note que ela sinaliza que colocar mais parâmetros sempre é uma boa opção!</p>
+<p>Clique <a href="https://pedro-rafael.shinyapps.io/shiny_apps/#section-maria-eduarda"><strong>AQUI</strong></a> para ver.</p>
+</section>
+<section id="cadê-os-demais-códigos" class="level2" data-number="2.15">
+<h2 data-number="2.15" class="anchored" data-anchor-id="cadê-os-demais-códigos"><span class="header-section-number">2.15</span> Cadê os demais códigos?</h2>
+<p>No código das simulações há diversas interções de códigos R com o a função <code>source()</code>. Onde estão esses arquivos. Sugiro criar uma conta no <a href="https://github.com/">GitHub</a> e criar um repositório com o script R e um pequeno comentário do que cada código faz.</p>
+<ul>
+<li>Onde está <code>gamlss_BP.R</code>?</li>
+<li>Onde está <code>glmBP.R</code>?</li>
+<li>Onde está <code>Estimation.R</code>?</li>
+<li>Onde está <code>Residual_H_Log_Like_BP.R</code>?</li>
+</ul>
+<p>Por exemplo, no paper do Marcelo, ele coloca a referência para o repositório do GitHub em que contém o pacote <strong>BPmodel</strong> (<a href="https://github.com/santosneto/BPmodel">ver aqui</a>) que muito provavelmente você está usando em algum script.</p>
+<p>É preciso que seu experimento seja totalmente repoduzível. Quem ler quer chegar aos mesmos resultados!</p>
+</section>
+<section id="por-que-i---i---1" class="level2" data-number="2.16">
+<h2 data-number="2.16" class="anchored" data-anchor-id="por-que-i---i---1"><span class="header-section-number">2.16</span> Por que <code>i &lt;- i - 1</code></h2>
+<p>No código, na página 88, dentro da instrução <code>else</code>, por que fazer <code>i &lt;- i - 1</code>? Não há problema teórico, pois na verdade se terá mais réplicas que as 10 mil. Então, na verdade foram realizadas mais de 10 mil répicas de Monte-Carlo.</p>
+</section>
+<section id="qual-o-método-de-otimiação-usado-em-gamlss" class="level2" data-number="2.17">
+<h2 data-number="2.17" class="anchored" data-anchor-id="qual-o-método-de-otimiação-usado-em-gamlss"><span class="header-section-number">2.17</span> Qual o método de otimiação usado em <code>gamlss</code>?</h2>
+<p>Qual o método de otimização utilizado pela função <code>gamlss</code>? Seria interessante colocar nas tabelas a taxa de não convergência. Isso é útil, uma vez que não há forma fechada para os estimadores de máxima verossimilhança. Perceber como a otimização numérica performa na maximização da função de log-verossimilhança é uma informação útil.</p>
+<!-- -->
+
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiada");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiada");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    if (id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        for (let i = 0; i < 2; i++) {
+          container.appendChild(note.children[i].cloneNode(true));
+        }
+        return container.innerHTML
+      } else {
+        return note.innerHTML;
+      }
+    } else {
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      try { hash = new URL(url).hash; } catch {}
+      const id = hash.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note !== null) {
+        try {
+          const html = processXRef(id, note);
+          instance.setContent(html);
+        } finally {
+          instance.enable();
+          instance.show();
+        }
+      } else {
+        // See if we can fetch this
+        fetch(url.split('#')[0])
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.getElementById(id);
+          if (note !== null) {
+            const html = processXRef(id, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Código fonte</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Sugestões de melhorias e comentários"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "MEDIDAS DE DIAGNÓSTICO EM MODELOS DE REGRESSÃO BETA PRIME"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "23/08/2023 as 14h00"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">lang:</span><span class="co"> pt</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Prof. Dr. Pedro Rafael D. Marinho"</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> html</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="an">code-tools:</span><span class="co"> true</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="an">code-copy:</span><span class="co"> true</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="an">number-sections:</span><span class="co"> true</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="an">page-layout:</span><span class="co"> full</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="an">editor:</span><span class="co"> source</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu"># Objetivos principais e observações:</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>Os objetivos principais do trabalho são:</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Estudo dos resíduos do modelo de regressão beta prime, para além do que Bourguignon et al. (2021) considerou.</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Bourguignon et al. (2021) considerou os resíduo quantílico e do de Pearson;</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Aqui foram considerados os resíduo:</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>resíduos ponderado;</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>**ponderado padronizado**. Esse foi o resíduo proposto;</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>Pearson padronizado;</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>Foi proposto coeficiente de predição $P^2$.</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Avalia-se a distribuição empírica dos</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>resíduos em diferentes cenários do modelo de regressão BP e comparamos seus desempenhos</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>para detectar especificação incorreta.</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>A distribuição beta prime pode ser escrita na família exponencial de distribuições. Portanto, "compete" com os modelos lineares generalizados.</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="ss">7. </span>Densidade da Beta Prime</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>$$f(y;\alpha, \beta) = \frac{y^{\alpha - 1}(1 + y)^{-(\alpha + \beta)}}{B(\alpha, \beta)}, y \geq 0,$$</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>com $\alpha &gt; 0$ e  $\beta &gt; 0$.</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="ss">8. </span>Notações:</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>$r_i^Q$: resíduo quantílico;</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>$r_i^P$: resíduo de Pearson;</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>$r^{\beta}$: resíduo poderado;</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>$r^{\beta*}$: resíduo ponderado padronizado;</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="ss">+ </span>$r^{P *}$: resíduo de Pearson padronizado.</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="fu"># Seguestões e comentários</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="fu">## O que é definir os resíduos ponderado e Pearson padronizado?</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>No resumo você diz: </span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; "além do resíduo quantílico e do</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="at">resíduo de Pearson utilizados por Bourguignon et al. (2021), **definimos** os resíduos ponderado,</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="at">ponderado padronizado (ESPINHEIRA et al., 2008) e Pearson padronizado (MCCULLAGH;</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="at">NELDER, 1989) para tal modelo." -- Maria Eduarda</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>O que é definir os resíudos? Não seria melhor trocar definir por "avaliamos"? Eles não já foram definidos pelos autores de uma forma genérica? Definir tem conotação de que vocês criaram.</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="fu">## Suporte da distribuição BP</span></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>O suporte da distribuição da beta prime não inclue o zero ($y \geq 0$)? Sei que Bourguignon et al. (2021) definiu como $y &gt; 0$, mas não seria $y \geq 0$? Note que na página 34 do paper (página 2 do PDF), último parágrafo, ele diz:</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Pode-se provar que a função densidade BP está diminuindo com $f(y|\alpha,\beta)$, se $0 &lt; \alpha &lt; 1$ com moda em $y = 0$. - Bourguignon et al. (2021)</span></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>Além disso, nas referências da distribuição $y\geq 0$.</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>**Uma observação**: Ela também é conhecida como distribuição de Pearson tipo VI. 🎁</span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- ## Estudar se a distribuição normal é uma boa aproximação? --&gt;</span></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- No trabalho vocês estudam se a distribuição normal-padrão é uma boa aproximação para os resíduos.  --&gt;</span></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- &gt; "Em particular, objetivamos verificar se a distribuição normal --&gt;</span></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- padrão é uma boa aproximação para a distribuição empírica desses cinco resíduos, quando o --&gt;</span></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- modelo de regressão BP é corretamente especificado, e analisar seus desempenhos para detectar --&gt;</span></span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- erros de especificação." -- Maria Eduarda --&gt;</span></span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Isso já não seria esperado pelo Teorema Central do Limite - TCL? Se eu tenho uma sequência de variáveis aleatórias i.i.d's, não é esperado se tenho dados suficientes, terei uma boa aproximação? Por que simular isso se eu tenho garantias teóricas da boa aproximação? --&gt;</span></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a><span class="fu">## Utilizar a teoria da informação</span></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>A ideia do estudo é a avaliação dos resíduos para a análise da especificação do modelo de regressão beta prime. Portanto, queremos estimar $r({\bf x}) = \mathbb{E}(Y|X)$, ou seja, desejamos uma função de regressão com boa capacidade preditiva. Uma das suposiões é que $Y\sim BP$. </span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>Pergunta: em cenários em que $Y$ segue a distribuição aproximadamente BP, utilizar estatísticas de adequação de ajuste para comparar a regressão BP com outros modelos de regressão, a exemplo, dos MGL's, como, por exemplo, com o modelo MLG com $Y \sim Gama$, a análise de resíduos proposta não levam as mesmas conclusões de que chegaríamos em aplicar utilizar a teoria da informação para checar a qualidade do ajuste? Por exemplo, utilizar estatísticas como a estatística de Cramér-von Mises e Anderson-Darling para modelos não encaixados não poderia ser útil para comparar a distribuição de $Y$ e decidir qual modelo melhor se ajusta aos dados? </span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a><span class="fu">## Especificação correta garante boa capacidade preditiva?</span></span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a>A especificação adequada do modelo garante boa capacidade preditiva? No resumo você diz:</span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; "Para isso, é importante utilizar resíduos com propriedades</span></span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a><span class="at">conhecidas e que apresentem bom desempenho." - Maria Eduarda</span></span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>Segundo a lógica de aprendizagem de máquina não! Ver o paper do Leio Breiman:</span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; </span><span class="co">[</span><span class="ot">Breiman, L. (2001a). Statistical modeling: The two cultures. Statistical Science, 16(3), 199–231</span><span class="co">](https://projecteuclid.org/journalArticle/Download?urlId=10.1214%2Fss%2F1009213726)</span></span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>Nesse artigo ele estabelece duas culturas na modelagem estatística:</span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Data modeling culture**: nela, em geral, se assume que o modelo de regressão utilizado $r({\bf x}) = \mathbb{E}(Y|{\bf X})$ é correto. O principal objetivo dessa abordagem é a interpretação dos parâmetros que indexam o modelo $r({\bf x})$.</span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Algorithmic modeling culture**: essa é a cultura que domina a comunidade de aprendizagem de máquina. Nessa abordagem, o principal objetivo são as predições por meio de novas observações. Não se assume que o modelo utilizado é o modelo correto. Nesse tipo de modelagem, muitas vezes os algoritmos não envolve nenhuma estrutura probabilística. Muitas vezes, modelos não bem especificado conduzem a boas predições.</span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>Existe uma sequência de respostas à esse paper, por exemplo, estatísticos renomados como o David Cox e o Bradley Efron respondem positivamente à esse paper. O artigo possui mais de 5300 citações.</span>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a>Podemos ter modelos que não estão bem especificados, mas possuem boa performance preditiva. Por exemplo, tente ajustar um <span class="co">[</span><span class="ot">random forest</span><span class="co">](https://hastie.su.domains/ISLR2/ISLRv2_corrected_June_2023.pdf)</span> em um problema, mesmo $Y \in B(\alpha,\beta)$, em um grande conjunto de dados, e usando um conjunto de teste, calcule o erro quadrático médio observado na amostra independente. Muito provavelmente o *random forest* terá uma capacidade preditiva igual ou superior ao modelo de regressão BP.</span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>Dessa forma, sugiro você comentar um pouco mais qual a grande importância da boa especificação do modelo. Essa boa especificação não está única e exclusivamente na capacidade preditiva do modelo, pois muitas vezes poderemos nos surpreender com modelos não muito bem especificado e que performa muito melhor. A grande contribuição de termos um modelo que esteja bem especificado é permitir que análises interpretativas possam ser realizadas. É preciso destacar isso, uma vez que muitas pessoas que estão lendo materiais da estatística são pessoas da ciência de dados/computação, em que muitas dalas "pregam" que o interesse está na previsão e ofuscam a importância de ter modelos bem especificados quando desejamos perceber a relação entre as variáveis, construir intervalos para os parâmetros e testar hipóteses.</span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a>No material fica um pouco nebuloso de qual a grande ideia de se fazer uma análise de resíduos.</span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a><span class="fu">## Avaliamos a distribuição empírica dos resíduos</span></span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a>Vocês fazem uma análise de distribuição empírica do resíduo, para detecção da especificação incorreta do modelo de regressão BP. Existe um apelo frequentista, uma vez que necessita-se de uma aproximação assintótica da distribuição dos resíduos para a normal. Até que ponto, essa análise é melhor que utilizar a teoria da informação e estudar a distribuição de $Y$, sobretudo em situações em que temos poucos dados ou uma quantidade moderada de dados?</span>
+<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a><span class="fu">## Pensam em adicionar penalização?</span></span>
+<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a>Sei que vocês focaram em desenvolver inferência para auxiliar a análise de especificação do modelo de regressão BP. Porém, vocês pensaram dar passos para avançar o modelo de regressão BP, por exemplo, pensam em adicionar algum tipo de penalização no modelo de regressão beta prime? Existe um *trade off* entre viés e variância, em que uma penalização poderia fazer com que o modelo viesse performar melhor. Um estudo avaliando a peformance do modelo com e sem penalização, em diversos cenários poderia ser interessante.</span>
+<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a><span class="fu">## A variância do modelo de regressão BP é maior? Como assim?</span></span>
+<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a>Você diz:</span>
+<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; "Uma das vantagens refere-se à modelagem de dados mais dispersos, uma vez que a variância do</span></span>
+<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a><span class="at">modelo de regressão BP é maior que a variância do modelo gama." - Maria Eduarda, página 12</span></span>
+<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a>Você refere-se à variância do modelo ou a capacidade do modelo em modelar $Y$ com maior variância? O risco preditivo do modelo não sofre com modelos com maior variância? Veja que o risco preditivo $R(\widehat{g})$, usando a norma $L_2$ no risco preditivo de um modelo de regressão, temos que o risco poderá ser decomposto como:</span>
+<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a>$$R(\widehat{g}) = \mathbb{E}\left<span class="co">[</span><span class="ot">(Y - \widehat{g}({\bf X}))^2| {\bf X} = {\bf x}\right</span><span class="co">]</span> = \underbrace{\mathbb{V}<span class="co">[</span><span class="ot">Y | {\bf X = x}</span><span class="co">]</span>}_{\mathrm{i - Variância\,\, intrínseca}} + \overbrace{(r({\bf x}) - \mathbb{E}[\widehat{g}({\bf x})])^2}^{\mathrm{ii - Viés\, ao\, quadrado\, do\, modelo}} + \underbrace{\mathbb{V}[\widehat{g}({\bf x})]}_{\mathrm{iii - Variância\, do\, modelo}},$$ </span>
+<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a>em que $\widehat{g}(\cdot)$ é sua função de regressão estimada. Quando você diz que a variância do modelo de regressão BP é maior, você não está dizendo que iii é maior? Isso não me daria um maior risco preditivo? Escreva melhor o que você está querendo dizer com variância maior!</span>
+<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a>Muito provavelmente existem diversas sequências de observações de $Y$ em que poderiam ser bem modeladas pela distribuição Gama e também pela distribuição BP. Se o modelo de regressão BP tem variância maior, poderia entender que modelar por um MLG eu teria um modelo que performa melhor? Como foi verificado que a variância do modelo é maior! Isso é realmente algo bom?</span>
+<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a>Você não estaria querendo dizer que o modelo de regressão BP modela dados mais dispersos? Isso pode ser diferente de um modelo com variância maior.</span>
+<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a><span class="fu">## O que é precisão dos dados?</span></span>
+<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Por outro lado, o resíduo ponderado padronizado aqui proposto deverá ser</span></span>
+<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a><span class="at">utilizado com cautela, dado que os experimentos de Monte Carlo revelaram que a proximidade</span></span>
+<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a><span class="at">da sua distribuição empírica pela distribuição normal padrão depende da precisão dos dados</span></span>
+<span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a><span class="at">ajustados pelo modelo de regressão BP. - Maria Eduarda, página 41, primeira linha.</span></span>
+<span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a>**Precisão dos dados? Essa expressão é estranha!**</span>
+<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a>O que tem que ser preciso são os modelos. Acho que você se refere à convergência assintótica das estimativas dos erros, nesse caso, do estimador do resíduo ponderado padronizado, denotado no trabalho por $r_i^{\beta^*}$ para a distribuição normal. Daí, quando $n \rightarrow +\infty$ temos que pela Teorema Central do Limite, $r_i^{\beta^*}$ deve convergir em distribuição para a distribuição normal. **Precisão de dados** tem outra conotação!</span>
+<span id="cb1-153"><a href="#cb1-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-154"><a href="#cb1-154" aria-hidden="true" tabindex="-1"></a><span class="fu">## Em qual situação $r_i^{\beta *}$ é melhor que $r_i^{Q}$</span></span>
+<span id="cb1-155"><a href="#cb1-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-156"><a href="#cb1-156" aria-hidden="true" tabindex="-1"></a>Em que situação os resíduos propostos (resíduo ponderado padronizado) é melhor que utilizar o $r_i^{Q}$? Ao fim, existe alguma situação que eu devo utilizar $r_i^{\beta *}$?</span>
+<span id="cb1-157"><a href="#cb1-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-158"><a href="#cb1-158" aria-hidden="true" tabindex="-1"></a><span class="fu">## Na avaliação das estatísticas PRESS</span></span>
+<span id="cb1-159"><a href="#cb1-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-160"><a href="#cb1-160" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">PRESS - Soma dos Quadrados dos Erros de Previsão</span><span class="co">](https://sci-hub.se/https://www.tandfonline.com/doi/abs/10.1080/00401706.1974.10489157)</span></span>
+<span id="cb1-161"><a href="#cb1-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-162"><a href="#cb1-162" aria-hidden="true" tabindex="-1"></a>Para avaliar a capacidade preditiva do modelo, é preciso que a sequência de variáveis aleatórias $(Y_i - \widehat{Y}_i)^2$ sejam i.i.d's, de modo que se você utiliza a mesma amostra para ajustar o modelo e obter $\widehat{Y}$ também para avaliar $d_1^2 = (Y_1 - \widehat{Y}_1)^2, d_2^2 = (Y_2 - \widehat{Y}_2)^2, \cdots, d_m^2 = (Y_m - \widehat{Y}_m)^2$, fazem com que essa sequência não sejam independentes. É preciso ter $m$ novas observações que não foram utilizadas para ajustar o modelo. Não tendo independência, não há garantias da lei dos grandes números para que</span>
+<span id="cb1-163"><a href="#cb1-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-164"><a href="#cb1-164" aria-hidden="true" tabindex="-1"></a>$$PRESS \rightarrow \mathbb{E}<span class="co">[</span><span class="ot">(Y - \widehat{Y})^2</span><span class="co">]</span> = n \times EQM$$</span>
+<span id="cb1-165"><a href="#cb1-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-166"><a href="#cb1-166" aria-hidden="true" tabindex="-1"></a>Em outras palavras, se foram utilizados as mesmas observações para calcular $\widehat{y}_i$, para todo $i$, então a sequência $(y_i - \widehat{y}_i)^2$ não são observações de uma sequência de variáveis aleatórias independentes, e a aproximação acima não é verdadeira. Essa separação de um conjunto de novas observações é feita em todo procedimento de validação cruzada, como no caso mais geral que é o *leave-one-out cross-validation*. </span>
+<span id="cb1-167"><a href="#cb1-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-168"><a href="#cb1-168" aria-hidden="true" tabindex="-1"></a>Muitas observações, a saber $n - 1$, são utilizadas para calcular $\widehat{y}_i$, para todo $i = 1, \cdots, n$. Portanto, existe dependência entre a sequência $d_1^2, \cdots, d_n^2$. O interessante seria considerar $m$ novas observações, e calcular $d_{n + 1}^2, \cdots, d_{m}^2$. É por isso, que muitos algoritmos de aprendizagem de máquina utilizam um conjunto de teste independente dos dados que são utilizados para ajustar os modelos.</span>
+<span id="cb1-169"><a href="#cb1-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-170"><a href="#cb1-170" aria-hidden="true" tabindex="-1"></a><span class="fu">## Página 47 $e_{(i)}$</span></span>
+<span id="cb1-171"><a href="#cb1-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-172"><a href="#cb1-172" aria-hidden="true" tabindex="-1"></a>Não seria melhor trocar $e_{(i)} = y_i - \widehat{y}_{(-i)}$ por $r_{(i)}$? O $e_{(i)}$ me induz a pensar no erro que é o que desejamos estimar.</span>
+<span id="cb1-173"><a href="#cb1-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-174"><a href="#cb1-174" aria-hidden="true" tabindex="-1"></a><span class="fu">## Ainda sobre a independência</span></span>
+<span id="cb1-175"><a href="#cb1-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-176"><a href="#cb1-176" aria-hidden="true" tabindex="-1"></a>O artigo do <span class="co">[</span><span class="ot">Mediavilla</span><span class="co">](http://www.na-businesspress.com/JABE/MendezWeb.pdf)</span> não é um paper com muitos cuidados. Não é verdade que a sequência de observações são independentes.</span>
+<span id="cb1-177"><a href="#cb1-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-178"><a href="#cb1-178" aria-hidden="true" tabindex="-1"></a>Na página 48 você diz:</span>
+<span id="cb1-179"><a href="#cb1-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-180"><a href="#cb1-180" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Como a $i$-ésima observação é omitida para prever $y_i$, então $\widehat{y}_{(-i)}$ e $e_{(-i)}$ são independentes, o que garante que a estatística $PRESS$ seja uma medida indicativa da capacidade de</span></span>
+<span id="cb1-181"><a href="#cb1-181" aria-hidden="true" tabindex="-1"></a><span class="at">previsão de um modelo de regressão, independentemente da qualidade do ajuste do modelo</span></span>
+<span id="cb1-182"><a href="#cb1-182" aria-hidden="true" tabindex="-1"></a><span class="at">(MEDIAVILLA et al., 2008).</span></span>
+<span id="cb1-183"><a href="#cb1-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-184"><a href="#cb1-184" aria-hidden="true" tabindex="-1"></a>Insisto que essa sequência não são de observações de variáveis aleatórias independentes. Clique <span class="co">[</span><span class="ot">AQUI</span><span class="co">](https://pedro-rafael.shinyapps.io/shiny_apps/#section-avalia%C3%A7%C3%A3o-do-risco-preditivo)</span> em que criei uma aplicação Web em que avalio o risco preditivo usando um precedimento de *leave-one-out cross-validation*, para uma regressão polinomial. Chamo de "certo" o risco quando avaliado em um conjunto de dados independente, em que nenhuma observação foi utilizada para calcular $\widehat{y}_i$ e chamo de "errado" o procedimento de realizar o *leave-one-out cross-validation* e depois não reavaliar o melhor modelo em um conjunto de dados independente. Note que, da forma errada, apenas selecionado o modelo usando*leave-one-out cross-validation* sem considerar um conjunto de teste me conduz a ideia de que aumentar o grau do polinômio, i.e., introduzir mais parâmetros sempre será uma boa altarnativa. Isso não é verdade, uma vez que um polinômio com grau muito elevado me leva à *overfitting*.</span>
+<span id="cb1-185"><a href="#cb1-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-186"><a href="#cb1-186" aria-hidden="true" tabindex="-1"></a><span class="fu">## AIC</span></span>
+<span id="cb1-187"><a href="#cb1-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-188"><a href="#cb1-188" aria-hidden="true" tabindex="-1"></a>Por que vocês não compararam a performance da adequação de ajuste do modelo usando o AIC? O procedimento de **Leave-one-out cross-validation** ao qual se baseia a estatística $PRESS$ (ver Allen 1974), em que</span>
+<span id="cb1-189"><a href="#cb1-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-190"><a href="#cb1-190" aria-hidden="true" tabindex="-1"></a>$$PRESS = \sum_{i = 1}^n (Y - \widehat{Y}_{(i)})^2.$$</span>
+<span id="cb1-191"><a href="#cb1-191" aria-hidden="true" tabindex="-1"></a>Só que Stones, um pouco depois, em 1977, mostro que **Leave-one-out cross-validation** converge assintoticamente para o método AIC. Vocês possuem a estrutura probabilística do modelo que permite o cálculo analítico do AIC. Portanto, avaliar o risco preditivo usando o AIC já seria suficiente, i.e, seria o melhor resultado assintótico do **leave-one-out**. Leia o artigo <span class="co">[</span><span class="ot">An Asymptotic Equivalence of Choice of Models by Cross-validation and Akaike's Criterion</span><span class="co">](https://www.jstor.org/stable/2984877)</span>. Esse paper é citado em mais de 1500 trabalhos.</span>
+<span id="cb1-192"><a href="#cb1-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-193"><a href="#cb1-193" aria-hidden="true" tabindex="-1"></a>Sugiro que seja comparado também com o AIC, uma vez que isso é facilmente feito.</span>
+<span id="cb1-194"><a href="#cb1-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-195"><a href="#cb1-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-196"><a href="#cb1-196" aria-hidden="true" tabindex="-1"></a><span class="fu">## Como se comporta a estatística $P_{\beta}^2$ e $P_{\beta_c}^2$</span></span>
+<span id="cb1-197"><a href="#cb1-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-198"><a href="#cb1-198" aria-hidden="true" tabindex="-1"></a>Na página 49 você define as estatísticas $P_{\beta}^2$ e $P_{\beta_c}^2$. Como se comportam tais estatísticas na presença de mais covariáveis no modelo? São monótonas? Seria legal ter uma simulação de Monte-Carlo mostrando como se comportam tais estatísticas e se elas penalizam modelos com muitos parâmetros. Fazer um gráfico com a evolução das estatísticas em que no eixo $x$ você vai aumentando a quantidade de parâmetros seria uma forma boa de visualizar o comportamento. A ideia é que as estatísticas $P_{\beta}^2$ e $P_{\beta_c}^2$ decresçam e a partir de um momento começem a piorar na medida que aumenta-se a quantidade de covariáveis. </span>
+<span id="cb1-199"><a href="#cb1-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-200"><a href="#cb1-200" aria-hidden="true" tabindex="-1"></a>Veja essa aplicação que implementei  a estatística $P^2$ para um modelo de regressão polinomial. Note que ela sinaliza que colocar mais parâmetros sempre é uma boa opção!</span>
+<span id="cb1-201"><a href="#cb1-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-202"><a href="#cb1-202" aria-hidden="true" tabindex="-1"></a>Clique <span class="co">[</span><span class="ot">**AQUI**</span><span class="co">](https://pedro-rafael.shinyapps.io/shiny_apps/#section-maria-eduarda)</span> para ver.</span>
+<span id="cb1-203"><a href="#cb1-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-204"><a href="#cb1-204" aria-hidden="true" tabindex="-1"></a><span class="fu">## Cadê os demais códigos?</span></span>
+<span id="cb1-205"><a href="#cb1-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-206"><a href="#cb1-206" aria-hidden="true" tabindex="-1"></a>No código das simulações há diversas interções de códigos R com o a função <span class="in">`source()`</span>. Onde estão esses arquivos. Sugiro criar uma conta no <span class="co">[</span><span class="ot">GitHub</span><span class="co">](https://github.com/)</span> e criar um repositório com o script R e um pequeno comentário do que cada código faz.</span>
+<span id="cb1-207"><a href="#cb1-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-208"><a href="#cb1-208" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>Onde está <span class="in">`gamlss_BP.R`</span>?</span>
+<span id="cb1-209"><a href="#cb1-209" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>Onde está <span class="in">`glmBP.R`</span>?</span>
+<span id="cb1-210"><a href="#cb1-210" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>Onde está <span class="in">`Estimation.R`</span>?</span>
+<span id="cb1-211"><a href="#cb1-211" aria-hidden="true" tabindex="-1"></a><span class="ss">  + </span>Onde está <span class="in">`Residual_H_Log_Like_BP.R`</span>?</span>
+<span id="cb1-212"><a href="#cb1-212" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-213"><a href="#cb1-213" aria-hidden="true" tabindex="-1"></a>Por exemplo, no paper do Marcelo, ele coloca a referência para o repositório do GitHub em que contém o pacote **BPmodel** (<span class="co">[</span><span class="ot">ver aqui</span><span class="co">](https://github.com/santosneto/BPmodel)</span>) que muito provavelmente você está usando em algum script. </span>
+<span id="cb1-214"><a href="#cb1-214" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-215"><a href="#cb1-215" aria-hidden="true" tabindex="-1"></a>É preciso que seu experimento seja totalmente repoduzível. Quem ler quer chegar aos mesmos resultados!</span>
+<span id="cb1-216"><a href="#cb1-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-217"><a href="#cb1-217" aria-hidden="true" tabindex="-1"></a><span class="fu">## Por que `i &lt;- i - 1`</span></span>
+<span id="cb1-218"><a href="#cb1-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-219"><a href="#cb1-219" aria-hidden="true" tabindex="-1"></a>No código, na página 88, dentro da instrução <span class="in">`else`</span>, por que fazer <span class="in">`i &lt;- i - 1`</span>? Não há problema teórico, pois na verdade se terá mais réplicas que as 10 mil. Então, na verdade foram realizadas mais de 10 mil répicas de Monte-Carlo.</span>
+<span id="cb1-220"><a href="#cb1-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-221"><a href="#cb1-221" aria-hidden="true" tabindex="-1"></a><span class="fu">## Qual o método de otimiação usado em `gamlss`?</span></span>
+<span id="cb1-222"><a href="#cb1-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-223"><a href="#cb1-223" aria-hidden="true" tabindex="-1"></a>Qual o método de otimização utilizado pela função <span class="in">`gamlss`</span>? Seria interessante colocar nas tabelas a taxa de não convergência. Isso é útil, uma vez que não há forma fechada para os estimadores de máxima verossimilhança. Perceber como a otimização numérica performa na maximização da função de log-verossimilhança é uma informação útil.</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
