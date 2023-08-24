@@ -16,6 +16,14 @@ editor: source
 
 Os objetivos principais do trabalho são:
 
+1. Reparametrizar a distribuição **Z**ero-**I**nflated **P**oisson - **ZIP** em termo da média da variável aleatória inflacionada no zero;
+
+2. A distribuição ZIP, foi proposta por Lambert, em 1992 e está parametrizada em termos de $\lambda$, parâmetro da distribuição Poisson usual, ou seja, a ZIP está parametrizada em termos da média da variável aleatória com distribuição de $Poisson(\lambda)$;
+
+3. A estimação dos parâmetros é feito pelo método de máxima verossimilhança e pelo método dos momentos;
+
+4. Simulações de Monte-Carlo - MC foram realizadas para avaliação dos estimadores de máxima verossimilhança. Também foram realizados simulações de MC para avaliar a peformance da construção de intervalos aleatórios. Tanto para o caso de estimação pontual quanto para o caso de estimação intervalar, considerou-se cenários com e sem erro de especificação.
+
 # Comentários
 
 Nas subseções que seguem descrevo alguns comentários.
@@ -23,3 +31,9 @@ Nas subseções que seguem descrevo alguns comentários.
 ## Sem ponto no título (capa)
 
 De acordo com as normas da ABNT (Associação Brasileira de Normas Técnicas), os títulos que aparecem na capa de um trabalho acadêmico, como uma monografia, dissertação, tese ou trabalho de conclusão de curso, não devem terminar com ponto final. Isso inclui o título principal do trabalho, bem como quaisquer subtítulos que possam ser adicionados.
+
+Isso também ocorre na página VI.
+
+## ZIP como abreviação de Poisson Inflacionada em Zero?
+
+Por exemplo, na introdução, página 1, você usa ZIP como abreviação a Poisson Inflacionada em Zero (ZIP). Na verdade ZIP é a abreviação para **Z**ero-**I**nflated **P**oisson.
