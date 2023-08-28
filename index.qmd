@@ -101,12 +101,6 @@ Senti falta da taxa de não-convergência dos estimadores de máxima verossimilh
 
 Na página 48, onde foi realizado o descarte das não convergências?
 
-## Você descartou as não convergências?
-
-As vezes não colocamos o código de todo o jeito e não damos a devida a tenção. É importante que o código esteja identado adequadamente e respeitando os limites das páginas. Por exemplo, na página 56 há código ultrapassando a margem direita. Veja também a página 49. Outro exemplo é o `if` na página 61. Também ocorre na página 64.
-
-Sugiro que coloque o código no GitHub para o melhor acesso das pessoas.
-
 ## Capítulo 7 ou Apêndice?
 
 Na página 46 é Capítulo 7 ou Apêndice? Além disso você cita:
@@ -118,13 +112,22 @@ Não é algoritmo. O que você está apresentando é o código. O algoritmo ante
 
 Além disso, atente-se ao português. Não é "algorítimo". A palavra correta é "algoritmo". O "t" é mudo e não tem acentuação no "i". Veja se cometeu esse erro em outros lugares!
 
+## Firam 10 mil ou 20 mil réplicas de Monte-Carlo?
+
+Na página 51, você define `R = 20000`. Esse `R` não é o número de réplicas de Monte-Carlo utilizada no loop `for` da página 52?
+
 ## Cadê os outros scripts (página 51)
 
 Na página 51 você carrega arquivos `.R` com o comando `source()`. Onde estão esses códigos?
-
 
 ```{R, eval = FALSE}
 source("ZIP.N_v03.T.R" )
 source("Function.fisher.N.R")
 source("zero.test.R")
 ```
+
+## Você descartou as não convergências?
+
+As vezes não colocamos o código de todo o jeito e não damos a devida a tenção. É importante que o código esteja identado adequadamente e respeitando os limites das páginas. Por exemplo, na página 56 há código ultrapassando a margem direita. Veja também a página 49. Outro exemplo é o `if` na página 61. Também ocorre na página 64.
+
+Sugiro que coloque o código no GitHub para o melhor acesso das pessoas.
