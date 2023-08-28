@@ -32,8 +32,99 @@ Nas subseções que seguem descrevo alguns comentários.
 
 De acordo com as normas da ABNT (Associação Brasileira de Normas Técnicas), os títulos que aparecem na capa de um trabalho acadêmico, como uma monografia, dissertação, tese ou trabalho de conclusão de curso, não devem terminar com ponto final. Isso inclui o título principal do trabalho, bem como quaisquer subtítulos que possam ser adicionados.
 
+## Cuidar da escrita
+
+Preste atenção na escrita e faça uma revisão completa do texto. Por exemplo, na página 3, a palavra "situações" você escreveu com "c" e não com "c cedilha".
+
 Isso também ocorre na página VI.
 
 ## ZIP como abreviação de Poisson Inflacionada em Zero?
 
 Por exemplo, na introdução, página 1, você usa ZIP como abreviação a Poisson Inflacionada em Zero (ZIP). Na verdade ZIP é a abreviação para **Z**ero-**I**nflated **P**oisson.
+
+## Equação 3.1
+
+Na página 7, não entendi o $\cdot$ na Eq. 3.1, para o caso de $y > 0$.
+
+## Página 9.
+
+Na página 9 você diz:
+
+> "obtivemos os estimadores dos parâmetros e
+intervalos de confiança para uma variável aleatória $Y$ que segue distribuição ZIPM." -- Irineu
+
+O intervalo de confiança também foi para os parâmetros. Da forma que escreveu, parece que fez intervalo de confiança para $Y$.
+
+## Página 10
+
+Na definição da função de probabilidade $Y \sim ZIPM(\delta, \mu)$, especifique os possíveis valores de $\delta$. Certamente é o mesmo da distribuição ZIP, mas você deve especificar novamente todos os parâmetros que compõe a distribuição modificada. 
+
+$0 \leq \delta < 1$?
+
+## Página 11
+
+Na página 11, na Figura 3.1, coloque o eixo $Y$ fixo começando sempre de zero. Pelo que vejo, o eixo foi criado automaticamente na plotagem. É possível especificar e fixar o eixo!
+
+## Página 21
+
+Você inicia dizendo no capítulo  de avaliação numérica
+
+> "Os resultados que são apresentados neste capítulo são oriundos de simulações de
+Monte Carlo com amostras de tamanhos 50, 100, 150 e 200. Todas as simulações foram
+realizadas com o software estatístico R."
+
+Foi utilizado quantas réplicas de Monte-Carlo? Você também não referenciou a linguagem R.
+
+
+## Na página 22
+
+No primeiro parágrafo da página 22 você diz que utilizou EQM, VR (viés relativo). Faltou definir o que são essas quantidades.
+
+
+## Dúvida
+
+Por que não avaliaram via simulação de Monte-Carlo a performance da estimativa intervalar via bootstrap, por exemplo, o bootstrap percentil considerando cenários com e sem erros de especificação? Principalmente nesse segundo caso, seria interessante perceber como se comporta a estimativa intervalar por meio de uma abordagem mais adequada.
+
+## Página 36
+
+Me dá a entender que você não fez uma revisão da escrita do material de forma satisfatória. No primeiro parágrafo da seção 4.3 você coloca $mu$ para escrever $\mu$.
+
+## Por que simular o método dos momentos?
+
+Existe alguma situação em que estimar os parâmetros que indexam a distribuição proposta pelo método dos momentos é uma alternativa mais adequada? Por que simular método dos momentos se eu posso estimar numericamente o estimador de máxima verossimilhança?
+
+## Qual a taxa de não convergência?
+
+Senti falta da taxa de não-convergência dos estimadores de máxima verossimilhança quando utiliza-se o método BFGS. É importante colocar na tabela das simulações, o percentual de não convergência, para assim, sinalizar a dificuldade numérica enfrentada para obtenção das estimativas.
+
+## Você descartou as não convergências?
+
+Na página 48, onde foi realizado o descarte das não convergências?
+
+## Você descartou as não convergências?
+
+As vezes não colocamos o código de todo o jeito e não damos a devida a tenção. É importante que o código esteja identado adequadamente e respeitando os limites das páginas. Por exemplo, na página 56 há código ultrapassando a margem direita. Veja também a página 49. Outro exemplo é o `if` na página 61. Também ocorre na página 64.
+
+Sugiro que coloque o código no GitHub para o melhor acesso das pessoas.
+
+## Capítulo 7 ou Apêndice?
+
+Na página 46 é Capítulo 7 ou Apêndice? Além disso você cita:
+
+> Apresentamos aqui os algorítimos utilizados para realizar as simulações do capítulo
+4 desta dissertação.
+
+Não é algoritmo. O que você está apresentando é o código. O algoritmo antecede o código e referece aos passos lógicos de uma determinada metodologia.
+
+Além disso, atente-se ao português. Não é "algorítimo". A palavra correta é "algoritmo". O "t" é mudo e não tem acentuação no "i". Veja se cometeu esse erro em outros lugares!
+
+## Cadê os outros scripts (página 51)
+
+Na página 51 você carrega arquivos `.R` com o comando `source()`. Onde estão esses códigos?
+
+
+```{R, eval = FALSE}
+source("ZIP.N_v03.T.R" )
+source("Function.fisher.N.R")
+source("zero.test.R")
+```
